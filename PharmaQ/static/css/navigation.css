@@ -1,0 +1,24 @@
+.main-nav {
+    flex-grow: 1;
+    padding-right: 6rem;
+}
+
+.nav-pic {
+    width: 30px;
+    height: auto;
+    vertical-align: middle;
+
+}
+
+.login-pic {
+    width: 40px;
+    height: auto;
+    vertical-align: middle;
+}  
+
+.main-nav ul {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+
+}

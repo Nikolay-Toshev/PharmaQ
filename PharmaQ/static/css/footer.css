@@ -1,0 +1,22 @@
+footer {
+    background-color: #0d5385;
+    padding: 2rem 1rem 1rem 1rem;
+    
+} 
+
+.footer p {
+    margin-inline: auto;
+} 
+
+.footer {
+    background-color: #a7c5df;
+    padding: 2rem;
+    border-radius: 10rem;
+    
+}
+
+.footer p {
+    color: #0d5385;
+    font-weight: 400;
+    font-style: normal;
+}

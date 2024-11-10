@@ -1,0 +1,12 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <p>Сигурни ли сте, че искате да изтриеете профила</p>
+    <form class="delete-form" method="post">
+        {% csrf_token %}
+        <h5>Сигурни ли сте, че искате да изтриете профила си?</h5>
+        <button type="submit" class="delete-btn">Delete</button>
+        <a href="{% url 'patient-details' request.user.pk %}" class="profile-btn">Go Back</a>
+    </form>
+{% endblock %}

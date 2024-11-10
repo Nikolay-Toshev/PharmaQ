@@ -1,0 +1,55 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="profile-details">
+        
+        {% if user.profile_img %}
+            <div class="profile-img">
+                <img src="{{ user.profile_img.url }}">
+            </div>
+        {% else %}
+            <div class="profile-img">
+                <img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
+            </div>
+        {% endif %}   
+        
+        <div class="profile">
+            <div class="profile-data">
+                <span class="profile-title"><b>Username:</b></span>
+                <span class="profile-content">{{ user.username }}</span>
+            </div>
+            
+            <div class="profile-data">
+                <span class="profile-title"><b>Email:</b></span>
+                <span class="profile-content">{{ user.email }}</span>
+            </div>
+            
+            
+            <div class="profile-data">
+                <span class="profile-title"><b>First Name:</b></span>
+                {% if user.first_name %}
+                    <span class="profile-content">{{ user.first_name }}</span>
+                {% else %}
+                    <span class="profile-content"> N / A</span>
+                {% endif %}
+            </div> 
+            
+            <div class="profile-data">
+                <span class="profile-title"><b>Last Name:</b></span>
+                {% if user.last_name %}
+                    <span class="profile-content">{{ user.last_name }}</span>
+                {% else %}
+                    <span class="profile-content"> N / A</span>
+                {% endif %}
+            </div>
+            
+            <br>
+            <br>
+            <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>
+            <a href="{% url 'patient-delete' user.pk %}" class="profile-btn">Изтрий</a>
+        </div>
+        
+    </div>
+    
+{% endblock %}

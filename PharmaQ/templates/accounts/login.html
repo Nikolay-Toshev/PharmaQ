@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="login-register">
+    
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            {{ form }}
+            <button class="login-btn">Login</button>
+        </form>    
+        
+        <p>Нямаш акаунт? Регистрирай се</p>
+        
+        <a href="{% url 'patient-registration' %}" class="redirect-btn">Регистрирай Пациент</a>
+        <a href="#" class="redirect-btn">Регистрирай Фармацевт</a>
+    </div>
+    
+{% endblock %}
