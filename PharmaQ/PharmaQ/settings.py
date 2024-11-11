@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 CUSTOM_APPS = [
     'PharmaQ.accounts.apps.AccountsConfig',
     'PharmaQ.common.apps.CommonConfig',
+    'PharmaQ.consultation.apps.ConsultationsConfig',
 ]
 
 INSTALLED_APPS = [
