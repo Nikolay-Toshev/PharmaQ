@@ -23,11 +23,17 @@
                         {% csrf_token %}
                         <button type="submit" class="logout-btn">Logout</button>
                     </form>
-                    
-                    <a href="{% url 'patient-details' request.user.pk %}">
-                        <img class="logo-pic" src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
-                    </a>
-                    
+                    <dvi class="header-img">
+                        {% if request.user.profile_img %}
+                            <a href="{% url 'patient-details' request.user.pk %}">
+                                <img class="logo-pic" src="{{ request.user.profile_img.url }}">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'patient-details' request.user.pk %}">
+                                <img class="logo-pic" src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
+                            </a>
+                        {% endif %}    
+                    </dvi>
 
                 {% else %}
                     <a href="{% url 'login' %}"><img src="{% static 'img/transparent-pill-medical-health-60c939a9b2f323.742927821623800233733.png' %}" alt="" class="login-pic">  Login/Register</a>

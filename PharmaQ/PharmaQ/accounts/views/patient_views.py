@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
@@ -21,25 +23,26 @@ class PatientRegistrationView(CreateView):
         return response
 
 
-class PatientDetailView(DetailView):
+class PatientDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = UserModel
     template_name = 'accounts/patient-details.html'
     context_object_name = 'user'
 
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        return self.request.user == user
 
-class PatientEditView(UpdateView):
+
+class PatientEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserModel
     form_class = PatientEditForm
     template_name = 'accounts/patient-edit.html'
 
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        return self.request.user == user
+
     def get_success_url(self):
         patient_id = self.kwargs['pk']
         return reverse_lazy('patient-details', kwargs={'pk': patient_id})
-
-
-class PatientDeleteView(DeleteView):
-    model = UserModel
-    template_name = 'accounts/patient-delete.html'
-    success_url = reverse_lazy('index')
-
 

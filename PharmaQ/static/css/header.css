@@ -33,3 +33,9 @@ header h1 {
     height: auto;
     vertical-align: middle;
 }
+
+.header-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

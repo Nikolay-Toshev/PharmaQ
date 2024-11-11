@@ -47,7 +47,8 @@
             <br>
             <br>
             <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>
-            <a href="{% url 'patient-delete' user.pk %}" class="profile-btn">Изтрий</a>
+            <a href="{% url 'password-change' user.pk %}" class="profile-btn change">Смени Паролата</a>
+            <a href="{% url 'patient-delete' user.pk %}" class="profile-btn delete">Изтрий</a>
         </div>
         
     </div>

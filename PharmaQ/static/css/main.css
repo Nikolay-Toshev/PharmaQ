@@ -33,11 +33,12 @@
 
 .profile-title {
     padding-right: 1rem;
+    width: 130px;
 }
 
 .profile-data {
     display: flex;
-    justify-content: space-between;
-    /*gap: 3rem;*/
+    /*justify-content: space-between;*/
+    gap: 1rem;
     padding-bottom: 1rem;
 }
