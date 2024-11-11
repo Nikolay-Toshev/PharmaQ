@@ -18,7 +18,7 @@
 .profile-details {
     padding: 2rem;
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
     max-width: 800px;
     margin: 3rem auto;
     border: 2px solid #0d5385;
@@ -41,4 +41,8 @@
     /*justify-content: space-between;*/
     gap: 1rem;
     padding-bottom: 1rem;
+}
+
+.profile h5 {
+    text-align: center;
 }

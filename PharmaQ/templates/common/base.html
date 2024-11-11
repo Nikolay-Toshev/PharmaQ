@@ -25,11 +25,11 @@
                     </form>
                     <dvi class="header-img">
                         {% if request.user.profile_img %}
-                            <a href="{% url 'patient-details' request.user.pk %}">
+                            <a href="{% url 'user-details' request.user.pk %}">
                                 <img class="logo-pic" src="{{ request.user.profile_img.url }}">
                             </a>
                         {% else %}
-                            <a href="{% url 'patient-details' request.user.pk %}">
+                            <a href="{% url 'user-details' request.user.pk %}">
                                 <img class="logo-pic" src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
                             </a>
                         {% endif %}    
