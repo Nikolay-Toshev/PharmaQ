@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load check_user_group %}
+
+{% block header_title %}
+    <h1>Моите въпроси</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="details">
+    {% for question in questions %}
+        <details>
+            <summary>{{ question.title }}</summary>
+            <p>{{ question.content }}</p>
+
+            {% if request.user.id != question.creator_id %} {# need to be fixed #}
+                <div class="details-btns">
+                    <span><a href="{% url 'question-edit' question.id %}">Редактирай</a></span>
+                    <span><a href="{% url 'question-delete' question.id %}">Изтрий</a></span>
+                </div>
+            {% endif %}
+        
+        </details>
+    {% endfor %}
+    </div>
+{% endblock %}

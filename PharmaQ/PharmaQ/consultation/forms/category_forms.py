@@ -1,5 +1,4 @@
 from django import forms
-
 from PharmaQ.consultation.models import Category
 
 

@@ -14,10 +14,15 @@ form input {
     width: 300px;
     padding: 0.5rem;
     display: block;
-    border-radius: 0.7rem;
+    border-radius: 0.3rem;
     border-color: #0d5385;
 }
 
+form select {
+    width: 300px;
+    font-size: 1rem;
+    padding-block: 0.5rem;
+}
 
 form label {
     color: #0d5385;

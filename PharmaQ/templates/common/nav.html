@@ -4,15 +4,20 @@
 
 <nav class="main-nav">
     <ul>
-        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">  Начало</a></li>
-        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">  Въпроси и Отговори</a></li>
-        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">  Категории</a></li>
-        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">  За нас / Контакти</a></li>
+        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">Начало</a></li>
+        {% if request.user|check_user_group:"patient" %}
+            <li><a href="{% url 'question-list' request.user.id %}"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">Моите въпроси</a></li>
+        {% endif %}
+        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">Въпроси и Отговори</a></li>
+        <li><a href="#"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">За нас / Контакти</a></li>
         {% if request.user.is_authenticated %}
-            <li><a href="{% url 'category-list' %}"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">  Категории</a></li>
+            <li><a href="{% url 'category-list' %}"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">Категории</a></li>
         {% endif %}
         {% if request.user|check_user_group:"site-moderator" %}
-            <li><a href="{% url 'category-create' %}"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">  Създай Категория</a></li>
+            <li><a href="{% url 'category-create' %}"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">Създай Категория</a></li>
+        {% endif %}
+        {% if request.user|check_user_group:"patient" %}
+            <li><a href="{% url 'question-create' %}"><img src="{% static 'img/kisspng-capsule-pharmaceutical-drug-clip-art-office-flex-cliparts-5ab631c0e1c0c6.8690727615218897289247.png' %}" alt="" class="nav-pic">Задай въпрос</a></li>
         {% endif %}
     </ul>
 </nav>

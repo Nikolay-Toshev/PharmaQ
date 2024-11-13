@@ -1,0 +1,14 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block header_title %}
+    <h1>Редактирай въпрос</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="register-btn">Submit</button>
+    </form>
+{% endblock %}
