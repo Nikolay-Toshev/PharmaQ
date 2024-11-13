@@ -101,3 +101,13 @@
     border-color: #11850d;
 
 }
+
+.details-btns {
+    display: flex;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    gap: 1rem;
+    justify-content: right;
+
+
+}

@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load check_user_group %}
+
+{% block header_title %}
+    <h1>Всички категории</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="details">
+    {% for category in categories %}
+        <details>
+            <summary>{{ category.title }}</summary>
+            <p>{{ category.description }}</p>
+            
+            {% if request.user|check_user_group:"site-moderator" %}
+            <div class="details-btns">
+                <span><a href="{% url 'category-edit' category.slug %}">Редактирай</a></span>
+                <span><a href="{% url 'category-delete' category.slug %}">Изтрий</a></span>
+            </div>
+            {% endif %}
+        </details>   
+    {% endfor %}
+    </div>
+{% endblock %}

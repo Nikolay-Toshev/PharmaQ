@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('PharmaQ.common.urls')),
     path('accounts/', include('PharmaQ.accounts.urls')),
+    path('consultations/', include('PharmaQ.consultation.urls')),
 
 ]
 
