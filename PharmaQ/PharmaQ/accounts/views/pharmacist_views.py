@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
@@ -15,11 +16,18 @@ class PharmacistRegistrationView(CreateView):
     success_url = reverse_lazy('index')
 
     def form_valid(self, form):
+
+        group = Group.objects.get(name='pharmacist')
+
         pharmacist = form.save(commit=False)
         pharmacist.is_patient = False
         pharmacist.is_pharmacist = True
+        pharmacist.is_approved = True # To be changed
+
         response = super().form_valid(form)
-    
+
+        pharmacist.groups.add(group)
+
         login(self.request, self.object)
 
         return response

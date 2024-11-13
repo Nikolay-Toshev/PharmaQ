@@ -7,11 +7,11 @@ class AppUser(AbstractUser):
 
     profile_img = models.ImageField(upload_to="profile_imgs/", blank=True, null=True)
 
-    is_patient = models.BooleanField(default=True)
+    is_patient = models.BooleanField(default=False)
 
     is_pharmacist = models.BooleanField(default=False)
 
-    is_approved = models.BooleanField(default=True)
+    is_approved = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if self.pk:
