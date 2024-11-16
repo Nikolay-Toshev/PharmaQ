@@ -1,16 +1,20 @@
 {% extends 'common/base.html' %}
 {% load static %}
 
-{% block header_title %}
-    <h1>Редактирай профил</h1>
-{% endblock %}
-
 {% block content %}
-    
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="edit-btn">Submit</button>
-    </form>
-    
+
+    <div class="form-outer-container">
+        <div class="form-container">
+            <div class="form-card">
+                <h1 class="form-title">Edit</h1>
+                
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>                
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

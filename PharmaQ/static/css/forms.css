@@ -1,76 +1,177 @@
-form {
-    margin-block: 2rem;
-    margin-inline: auto;
-    max-width: 400px;
-    background-color: #a7c5df;
-    border-radius: 0.5rem;
-    border: 2px solid #0d5385;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-form input {
-    width: 300px;
-    padding: 0.5rem;
+form a {
     display: block;
-    border-radius: 0.3rem;
-    border-color: #0d5385;
+    text-align: right;
 }
 
-form select {
-    width: 300px;
-    font-size: 1rem;
-    padding-block: 0.5rem;
-}
-
-form label {
-    color: #0d5385;
-}
-
-form div {
-    padding-block: 0.5rem;
-    width: 300px;
-}
-
-form textarea {
-    /*margin: 1rem;*/
-    padding: 0.5rem;
-    width: 300px;
+form .errorlist li {
+    list-style: none;
+    color: red;
+    font-size: 0.8rem;
 }
 
 form .helptext {
     display: none;
 }
 
-.errorlist {
-    width: 300px;
-    color: red;
-    font-size: 0.7rem;
+form textarea {
+    width: 100%;
+    resize: none;
 }
 
-.errorlist li {
-    list-style-position: inside;
+form select {
+    width: 100%;
+    padding: 0.5rem;
 }
 
-.logout-form {
-    margin: 0;
-    border: none;
-}
-
-.delete-form {
-    padding: 2rem;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.delete-form h5 {
-    color: #850d0d;
+form .answer-details h3 {
     text-align: center;
 }
 
-.change-password {
-    padding: 2rem;
+.delete-form h5{
+    text-align: center;
+    padding-bottom: 2rem;
+    color: #d50909;
+}
+
+.form-outer-container {
+    margin: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.form-container a {
+    font-size: 0.8rem;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+.form-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-card div {
+    margin-bottom: 15px;
+}
+
+.form-card div label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-card div input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-card div input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.form-footer {
+    display: block;
+    text-align: center;
+}
+/*details*/
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile {
+    width: 100%;
+}
+
+.profile-title {
+    padding-right: 1rem;
+    width: 130px;
+}
+
+.profile-data {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.profile a {
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    margin: 1rem 0;
+}
+
+.profile a:hover {
+    text-decoration: none;
+    background-color: #0d5385;
+}
+
+.details-btns {
+    text-align: right;
+}
+
+.details-btns span {
+    padding: 0.5rem;
+}
+
+details {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-block: 0.5rem;
+    text-decoration: none;
+}
+
+summary {
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 550;
+}
+
+details p {
+    padding-top: 1rem;
+}
+
+
+details:not([open]):hover {
+    background-color: #007bff;
 }

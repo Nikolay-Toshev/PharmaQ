@@ -1,16 +1,20 @@
 {% extends 'common/base.html' %}
 {% load static %}
 
-{% block header_title %}
-    <h1>Регистрирай профил</h1>
-{% endblock %}
-
 {% block content %}
-    
-    <form method="post" class="register-form">
-        {% csrf_token %}
-        {{ form }}
-        <button class="register-btn">Submit</button>
-    </form>
+    <div class="form-outer-container">
+        <div class="form-container">
+            <div class="form-card">
+                <h1 class="form-title">Sign Up</h1>
+                
+                <form method="post">                    
+                    {% csrf_token %}
+                    {{ form.as_div }}                    
+                    <button type="submit" class="btn btn-primary">Sign Up</button>                    
+                </form>
+
+            </div>
+        </div>
+    </div>
     
 {% endblock %}

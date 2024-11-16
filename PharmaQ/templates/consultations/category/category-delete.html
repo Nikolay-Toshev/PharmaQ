@@ -6,9 +6,20 @@
 {% endblock %}
 
 {% block content %}
-    <form class="delete-form" method="post">
-        {% csrf_token %}
-        <h5>Сигурен ли си, че искаш да изтриеш категорията?</h5>
-        <button type="submit" class="delete-btn">Submit</button>
-    </form>
+
+    <div class="form-outer-container">
+        <div class="form-container">
+            <div class="form-card">
+            
+                <h1 class="form-title">Delete</h1>
+                
+                <form method="post" class="delete-form">
+                    {% csrf_token %}
+                    <h5>Are you sure want to delete the category?</h5>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>            
 {% endblock %}

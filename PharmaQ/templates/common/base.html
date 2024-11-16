@@ -5,58 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Platform</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>Document</title>
 </head>
 <body>
-    
-        <header>
-            <div class="header">
-                
-                <a href="{% url 'index' %}" class="logo"><img src="{% static 'img/0b60191ffe56a7f235f5a1c481acbfaa.png' %}" alt="" class="logo-pic">  Попитай Фармацевта</a>
-                
-                {% include 'common/nav.html' %}  
-            
-                {% if request.user.is_authenticated %}
-                    
-                    <form method="post" action="{% url 'logout' %}" class="logout-form">
-                        {% csrf_token %}
-                        <button type="submit" class="logout-btn">Logout</button>
-                    </form>
-                    <dvi class="header-img">
-                        {% if request.user.profile_img %}
-                            <a href="{% url 'user-details' request.user.pk %}">
-                                <img class="logo-pic" src="{{ request.user.profile_img.url }}">
-                            </a>
-                        {% else %}
-                            <a href="{% url 'user-details' request.user.pk %}">
-                                <img class="logo-pic" src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
-                            </a>
-                        {% endif %}    
-                    </dvi>
+    <header>
+        {% include 'common/nav.html' %}
+    </header>
 
-                {% else %}
-                    <a href="{% url 'login' %}"><img src="{% static 'img/transparent-pill-medical-health-60c939a9b2f323.742927821623800233733.png' %}" alt="" class="login-pic">  Login/Register</a>
-                {% endif %}
-            
-            </div>
-
-            
-            {% block header_title %}
-            {% endblock %}
-
-        </header>
-
-        
     <main>
         {% block content %}
         {% endblock %}
     </main>
-    
+
     <footer>
-        <div class="footer">
-            <p>&copy;Nikolay Toshev 2024. All rights reserved.</p>
-        </div>
+        {% include 'common/footer.html' %}
     </footer>
 </body>
 </html>

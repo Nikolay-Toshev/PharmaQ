@@ -1,24 +1,73 @@
-.main-nav {
-    flex-grow: 1;
-    padding-right: 1rem;
+.menu-item {
+    position: relative;
 }
 
-.nav-pic {
-    width: 30px;
-    height: auto;
-    vertical-align: middle;
-
+.menu-item.dropdown:hover .dropdown-menu{
+    display: block;
 }
 
-.login-pic {
-    width: 40px;
-    height: auto;
-    vertical-align: middle;
-}  
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #007bff;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    min-width: 10rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
 
-.main-nav ul {
+.navbar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 0;
+}
+
+.navbar .container {
     display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
 
+.navbar .logo {
+    color: #fff;
+    font-size: 2rem;
+    font-family: "Marck Script", cursive;
+    font-weight: 550;
+}
+
+.navbar .logo-pic {
+    width: 50px;
+    height: auto;
+    vertical-align: middle;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .nav-links li {
+    display: inline;
+}
+
+.navbar .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: block;
+}
+
+.navbar .nav-links a:hover {
+    background-color: #0d5385;
 }

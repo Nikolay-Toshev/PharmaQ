@@ -1,88 +1,69 @@
-details {
-    margin: 1.5rem auto;
-    max-width: 700px;
-    background-color: #a7c5df;
-    border-radius: 0.5rem;
-}
-
-summary {
-    background-color: #0d5385;
-    color: white;
-    list-style-type: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    position: relative;
-    padding: 1rem 2rem;
-  }
-
-details p {
-    padding-block:1rem;
-    padding-left: 3rem;
-}
-
-.details{
-    margin: 1.5rem auto;
-    max-width: 800px;
-}
-
-.login-register {
-    margin-block: 2rem;
-    margin-inline: auto;
-    padding-bottom: 2rem;
-    max-width: 450px;
-    background-color: #0d5385;
-    border-radius: 2.5rem;
-    border: 2px solid #a7c5df;
+/*index.html*/
+.index {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-.login-register p {
+.hero-section {
+    background-color: #e9ecef;
+    padding: 50px 15px;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero-section .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
     color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
-.profile-details {
-    padding: 2rem;
-    display: flex;
-    gap: 2rem;
-    max-width: 800px;
-    margin: 3rem auto;
-    border: 2px solid #0d5385;
-    border-radius: 0.5rem;
-    background-color: #a7c5df;
+.hero-section .btn:hover {
+    background-color: #0056b3;
 }
 
-.profile {
-    color: #0d5385;
-    max-width: 400px;
+.features-section {
+    padding: 50px 15px;
 }
 
-.profile-title {
-    padding-right: 1rem;
-    width: 130px;
-}
-
-.profile-data {
-    display: flex;
-    /*justify-content: space-between;*/
-    gap: 1rem;
-    padding-bottom: 1rem;
-}
-
-.profile h5 {
+.features-section h2 {
     text-align: center;
+    margin-bottom: 30px;
 }
 
-.answer-details {
-    max-width: 800px;
-    margin: 1rem auto;
+.features {
+    display: flex;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+.feature {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border: 2px solid #0d5385;
-    border-radius: 0.5rem;
-    background-color: #a7c5df;
+    flex: 1;
 }
 
-.answer-details form {
-    border: none;
+.feature h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
+
+
+
