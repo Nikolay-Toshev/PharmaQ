@@ -74,3 +74,15 @@ details p {
     text-align: center;
 }
 
+.answer-details {
+    max-width: 800px;
+    margin: 1rem auto;
+    text-align: center;
+    border: 2px solid #0d5385;
+    border-radius: 0.5rem;
+    background-color: #a7c5df;
+}
+
+.answer-details form {
+    border: none;
+}

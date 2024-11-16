@@ -1,9 +1,9 @@
 from django.urls import path, include
 
-from PharmaQ.consultation.views.category_views import CategoryCreateView, CategoryEditView, CategoryDeleteView, \
-    CategoryListView
-from PharmaQ.consultation.views.question_views import QuestionCreateView, QuestionEditView, QuestionDeleteView, \
-    QuestionListView
+from PharmaQ.consultation.views import CategoryCreateView, CategoryEditView, CategoryDeleteView, \
+    CategoryListView, AnswerCreateView, AnswerListView
+from PharmaQ.consultation.views import QuestionCreateView, QuestionEditView, QuestionDeleteView, \
+    MyQuestionsListView, UnansweredQuestionsListView
 
 urlpatterns = [
     path('categories/', include([
@@ -20,7 +20,13 @@ urlpatterns = [
         path('<int:pk>/', include([
             path('edit/', QuestionEditView.as_view(), name='question-edit'),
             path('delete/', QuestionDeleteView.as_view(), name='question-delete'),
-            path('list/', QuestionListView.as_view(), name='question-list'),
-        ]))
+            path('list/', MyQuestionsListView.as_view(), name='question-list'),
+            path('answer/', AnswerCreateView.as_view(), name='answer-create'),
+        ])),
+        path('list/', UnansweredQuestionsListView.as_view(), name='question-list-unanswered'),
+    ])),
+    path('answers/', include([
+        path('pharmacist/<int:pk>/list/', AnswerListView.as_view(), name='answer-list'),
     ]))
+
 ]

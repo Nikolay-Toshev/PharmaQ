@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block header_title %}
+    <h1>Отговори на въпрос</h1>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="answer-details">
+        <h3>Въпрос</h3>
+        <h5>{{ question.title }}</h5>
+        <p>{{ question.content }}</p>
+        <br>
+        <h3>Отговор</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="register-btn">Submit</button>
+    </form>
+    </div>
+{% endblock %}

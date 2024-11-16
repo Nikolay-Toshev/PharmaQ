@@ -48,7 +48,7 @@ class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user.groups.filter(name__exact='patient').exists()
 
 
-class QuestionListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Question
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
@@ -59,4 +59,16 @@ class QuestionListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         return self.request.user == user
+
+
+class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = Question
+    template_name = 'consultations/question/question-list.html'
+    context_object_name = 'questions'
+
+    def get_queryset(self):
+        return Question.objects.filter(answers__isnull=True)
+
+    def test_func(self):
+        return self.request.user.groups.filter(name__exact='pharmacist').exists()
 

@@ -1,0 +1,31 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% load check_user_group %}
+
+{% block header_title %}
+    <h1>Моите въпроси</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="details">
+    {% for answer in answers %}
+        <details>
+            <summary>{{ answer.content }}</summary>
+            <p>{{ question.content }}</p>
+
+            {% if request.user == answer.creator_id %}
+                <div class="details-btns">
+                    <span><a href="#">Редактирай</a></span>
+                    <span><a href="#">Изтрий</a></span>
+                </div>
+                    <div class="profile-details">
+
+                    <p>{{ answer.question_id }}</p>
+
+                    </div>
+            {% endif %}
+
+        </details>
+    {% endfor %}
+    </div>
+{% endblock %}
