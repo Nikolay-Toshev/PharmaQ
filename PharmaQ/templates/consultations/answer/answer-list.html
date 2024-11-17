@@ -16,8 +16,8 @@
                 
                         {% if request.user == answer.creator_id %}
                             <div class="details-btns">
-                                <span><a href="#">Edit</a></span>
-                                <span><a href="#">Delete</a></span>
+                                <span><a href="{% url 'answer-edit' user.pk answer.pk %}">Edit</a></span>
+                                <span><a href="{% url 'answer-delete' user.pk answer.pk %}">Delete</a></span>
                             </div>
                                 <div class="profile-details">
                 

@@ -12,7 +12,11 @@
     <div class="form-outer-container">
         <div class="form-container">
             <div class="form-card">
-                <h1 class="form-title">My questions</h1>
+                {% if request.user == question.creator_id %}
+                    <h1 class="form-title">My questions</h1>
+                {% elif request.user|check_user_group:'pharmacist' %}
+                    <h1 class="form-title">Unanswered questions</h1>
+                {% endif %}
                 <div class="details">
                     {% for question in questions %}
                         <details>
@@ -21,8 +25,8 @@
                 
                             {% if request.user == question.creator_id %}
                                 <div class="details-btns">
-                                    <span><a href="{% url 'question-edit' question.id %}">Редактирай</a></span>
-                                    <span><a href="{% url 'question-delete' question.id %}">Изтрий</a></span>
+                                    <span><a href="{% url 'question-edit' user.pk question.id %}">Редактирай</a></span>
+                                    <span><a href="{% url 'question-delete' user.pk question.id %}">Изтрий</a></span>
                                 </div>
                                 {% has_answer question.pk as has_answer %}
                                 {% if has_answer %}

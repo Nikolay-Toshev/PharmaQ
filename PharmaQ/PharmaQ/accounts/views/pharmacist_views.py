@@ -22,7 +22,7 @@ class PharmacistRegistrationView(CreateView):
         pharmacist = form.save(commit=False)
         pharmacist.is_patient = False
         pharmacist.is_pharmacist = True
-        pharmacist.is_approved = True # To be changed
+        pharmacist.is_approved = True # To be changed when implementing the email validation
 
         response = super().form_valid(form)
 

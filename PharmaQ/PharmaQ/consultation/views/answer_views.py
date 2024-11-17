@@ -1,33 +1,41 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
-from PharmaQ.consultation.forms import AnswerCreateForm
-from PharmaQ.consultation.models import Answer, Question, question
-
+from PharmaQ.consultation.forms import AnswerCreateForm, AnswerEditForm
+from PharmaQ.consultation.models import Answer, Question
 
 UserModel = get_user_model()
 
 class AnswerCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'consultations/answer/answer-create.html'
     form_class = AnswerCreateForm
-    success_url = reverse_lazy('index') #to be fixed
 
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
 
-        question = Question.objects.get(pk=self.kwargs['pk'])
+        question = Question.objects.get(pk=self.kwargs['question_pk'])
         context['question'] = question
         return context
 
     def test_func(self):
         return self.request.user.groups.filter(name__exact='pharmacist').exists()
 
+    def dispatch(self, request, *args, **kwargs):
+        question = get_object_or_404(Question, pk=self.kwargs['question_pk'])
+
+        if Answer.objects.filter(question_id=question).exists():
+            raise PermissionDenied
+
+        return super().dispatch(request, *args, **kwargs)
+
+
     def form_valid(self, form):
-        question = get_object_or_404(Question, pk=self.kwargs['pk'])
+        question = get_object_or_404(Question, pk=self.kwargs['question_pk'])
         answer = form.save(commit=False)
         answer.creator_id = self.request.user
         answer.question_id = question
@@ -36,13 +44,51 @@ class AnswerCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
         return response
 
+    def get_success_url(self):
+        user = get_object_or_404(UserModel, pk=self.request.user.pk)
+        return reverse_lazy('question-list-unanswered', kwargs={'user_pk': user.pk})
 
-class AnswerUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    pass
 
+class AnswerEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Answer
+    template_name = 'consultations/answer/answer-edit.html'
+    form_class = AnswerEditForm
+
+    def get_object(self, queryset=None):
+        user_pk = self.kwargs['user_pk']
+        answer_pk = self.kwargs['answer_pk']
+        return get_object_or_404(Answer, pk=answer_pk, creator_id=user_pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        answer_to_edit = get_object_or_404(Answer, pk=self.kwargs['answer_pk'])
+        question = get_object_or_404(Question, pk=answer_to_edit.question_id_id)
+        context['question'] = question
+        return context
+
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.request.user.pk)
+        answer_to_edit = get_object_or_404(Answer, pk=self.kwargs['answer_pk'])
+        return user == answer_to_edit.creator_id
+
+    def get_success_url(self):
+        return reverse_lazy('answer-list', kwargs={'user_pk': self.request.user.pk})
 
 class AnswerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    pass
+    model = Answer
+    template_name = 'consultations/answer/answer-delete.html'
+
+    def get_object(self, queryset=None):
+        user_pk = self.kwargs['user_pk']
+        answer_pk = self.kwargs['answer_pk']
+        return get_object_or_404(Answer, pk=answer_pk, creator_id=user_pk)
+
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.request.user.pk)
+        return user == self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('answer-list', kwargs={'user_pk': self.request.user.pk})
 
 
 class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
@@ -54,6 +100,6 @@ class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return Answer.objects.filter_by_creator(creator_id=self.request.user.pk)
 
     def test_func(self):
-        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
         return self.request.user == user
 

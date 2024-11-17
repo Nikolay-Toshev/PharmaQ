@@ -19,10 +19,3 @@ class QuestionCreateForm(QuestionBaseForm):
 class QuestionEditForm(QuestionBaseForm):
     pass
 
-
-# class QuestionDetailForm(QuestionBaseForm):
-#     class Meta(QuestionBaseForm.Meta):
-#         widgets = {
-#             'title': forms.TextInput(attrs={'disabled': 'disabled'}),
-#             'content': forms.Textarea(attrs={'disabled': 'disabled'}),
-#         }

@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="form-outer-container">
+        <div class="form-container">
+            <div class="form-card">
+                
+                <h1 class="form-title">Edit</h1>
+                <div class="answer-details">
+                    <h6>{{ question.title }}</h6>
+                    <p>{{ question.content }}</p>
+                    <br>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>                
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

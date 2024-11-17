@@ -14,3 +14,7 @@ class AnswerBaseForm(forms.ModelForm):
 
 class AnswerCreateForm(AnswerBaseForm):
     pass
+
+
+class AnswerEditForm(AnswerBaseForm):
+    pass

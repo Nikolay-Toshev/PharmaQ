@@ -15,11 +15,13 @@ class AppUserLoginView(LoginView):
 
 class AppUserChangePasswordView(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView):
     template_name = 'accounts/change-password.html'
-    success_url = reverse_lazy('index')
 
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         return self.request.user == user
+
+    def get_success_url(self):
+        return reverse_lazy('user-details', kwargs={'pk':self.request.user.pk})
 
 
 class AppUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

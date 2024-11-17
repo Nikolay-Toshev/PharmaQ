@@ -25,7 +25,7 @@
                             <li><a href="{% url 'question-create' %}">Ask question</a></li>
                         {% elif request.user|check_user_group:"pharmacist" %}
                             <li><a href="{% url 'answer-list' request.user.pk %}">My answers</a></li>
-                            <li><a href="{% url 'question-list-unanswered' %}">Answer question</a></li>
+                            <li><a href="{% url 'question-list-unanswered' request.user.pk %}">Answer question</a></li>
                         {% elif request.user|check_user_group:"site-moderator" %}
                             <li><a href="#">Approve Pharmacist</a></li>
                             <li><a href="{% url 'category-create' %}">Create category</a></li>
