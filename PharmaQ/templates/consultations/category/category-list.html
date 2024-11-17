@@ -17,8 +17,8 @@
                         
                         {% if request.user|check_user_group:"site-moderator" %}
                         <div class="details-btns">
-                            <span><a href="{% url 'category-edit' category.slug %}">Редактирай</a></span>
-                            <span><a href="{% url 'category-delete' category.slug %}">Изтрий</a></span>
+                            <span><a href="{% url 'category-edit' category.slug %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
+                            <span><a href="{% url 'category-delete' category.slug %}"><i class="fa-solid fa-trash"></i></a></span>
                         </div>
                         {% endif %}
                     </details>   

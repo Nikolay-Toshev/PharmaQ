@@ -25,8 +25,8 @@
                 
                             {% if request.user == question.creator_id %}
                                 <div class="details-btns">
-                                    <span><a href="{% url 'question-edit' user.pk question.id %}">Редактирай</a></span>
-                                    <span><a href="{% url 'question-delete' user.pk question.id %}">Изтрий</a></span>
+                                    <span><a href="{% url 'question-edit' user.pk question.id %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
+                                    <span><a href="{% url 'question-delete' user.pk question.id %}"><i class="fa-solid fa-trash"></i></a></span>
                                 </div>
                                 {% has_answer question.pk as has_answer %}
                                 {% if has_answer %}
