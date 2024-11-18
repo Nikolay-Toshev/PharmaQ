@@ -11,19 +11,21 @@
                 
                 {% for answer in answers %}
                     <details>
-                        <summary>{{ answer.content }}</summary>
-                        <p>{{ question.content }}</p>
+                        <summary>
+                            <h6>{{ answer.question_id.title }}</h6>
+                            <p>{{ answer.question_id.category_id }}</p>
+                        </summary>
+                        <div class="profile-details">
+                
+                            <p>{{ answer.content }}</p>
+                
+                        </div>
                 
                         {% if request.user == answer.creator_id %}
                             <div class="details-btns">
-                                <span><a href="{% url 'answer-edit' user.pk answer.pk %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
-                                <span><a href="{% url 'answer-delete' user.pk answer.pk %}"><i class="fa-solid fa-trash"></i></a></span>
+                                <span><a href="{% url 'my-answer-details' user.pk answer.pk %}">Details</a></span>
                             </div>
-                                <div class="profile-details">
-                
-                                <p>{{ answer.question_id }}</p>
-                
-                                </div>
+
                         {% endif %}
 
                     </details>

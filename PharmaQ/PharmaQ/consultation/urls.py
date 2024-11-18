@@ -1,8 +1,8 @@
 from django.urls import path, include
 from PharmaQ.consultation.views import CategoryCreateView, CategoryEditView, CategoryDeleteView, \
-    CategoryListView, AnswerCreateView, AnswerListView, AnswerEditView, AnswerDeleteView, MyQuestionDetailView
-from PharmaQ.consultation.views import QuestionCreateView, QuestionEditView, QuestionDeleteView, \
-    MyQuestionsListView, UnansweredQuestionsListView
+    CategoryListView, AnswerCreateView, AnswerListView, AnswerEditView, AnswerDeleteView, MyQuestionDetailView, \
+    QuestionCreateView, QuestionEditView, QuestionDeleteView, MyQuestionsListView, UnansweredQuestionsListView, \
+    MyAnswerDetailView
 
 urlpatterns = [
     path('categories/', include([
@@ -31,6 +31,7 @@ urlpatterns = [
             path('answer/<int:answer_pk>/', include([
                 path('edit/', AnswerEditView.as_view(), name='answer-edit'),
                 path('delete/', AnswerDeleteView.as_view(), name='answer-delete'),
+                path('details/', MyAnswerDetailView.as_view(), name='my-answer-details'),
             ])),
         ]))
     ]))

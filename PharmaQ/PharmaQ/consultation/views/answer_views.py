@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from PharmaQ.consultation.forms import AnswerCreateForm, AnswerEditForm
 from PharmaQ.consultation.models import Answer, Question
@@ -102,4 +102,32 @@ class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
         return self.request.user == user
+
+
+class MyAnswerDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = Answer
+    context_object_name = 'answer'
+    template_name = 'consultations/answer/answer-details.html'
+
+    def get_object(self, queryset=None):
+        user_pk = self.kwargs['user_pk']
+        answer_pk = self.kwargs['answer_pk']
+        return get_object_or_404(Answer, pk=answer_pk, creator_id=user_pk)
+
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
+        return self.request.user == user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        pharmacist = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
+        question = get_object_or_404(Question, answers=self.kwargs['answer_pk'])
+        patient = get_object_or_404(UserModel, pk=question.creator_id_id)
+
+        context['pharmacist'] = pharmacist
+        context['question'] = question
+        context['patient'] = patient
+
+        return context
 

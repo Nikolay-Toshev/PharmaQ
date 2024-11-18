@@ -1,12 +1,9 @@
-from PIL.SpiderImagePlugin import iforms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
-
-from PharmaQ.accounts.models import AppUser
 from PharmaQ.consultation.forms import QuestionCreateForm, QuestionEditForm
 from PharmaQ.consultation.models import Question, Answer
 
@@ -105,17 +102,16 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         question_pk = self.kwargs.get('question_pk')
         return get_object_or_404(Question, pk=question_pk, creator_id_id=user_pk)
 
-
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
         return self.request.user == user
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        patient = get_object_or_404(AppUser, pk=self.kwargs['user_pk'])
+        patient = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
         try:
             answer = get_object_or_404(Answer, question_id_id=self.kwargs['question_pk'])
-            pharmacist = get_object_or_404(AppUser, pk=answer.creator_id_id)
+            pharmacist = get_object_or_404(UserModel, pk=answer.creator_id_id)
             context['answer'] = answer
             context['pharmacist'] = pharmacist
         except Http404:
