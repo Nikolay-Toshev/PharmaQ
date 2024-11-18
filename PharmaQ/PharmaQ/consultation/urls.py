@@ -1,6 +1,6 @@
 from django.urls import path, include
 from PharmaQ.consultation.views import CategoryCreateView, CategoryEditView, CategoryDeleteView, \
-    CategoryListView, AnswerCreateView, AnswerListView, AnswerEditView, AnswerDeleteView
+    CategoryListView, AnswerCreateView, AnswerListView, AnswerEditView, AnswerDeleteView, MyQuestionDetailView
 from PharmaQ.consultation.views import QuestionCreateView, QuestionEditView, QuestionDeleteView, \
     MyQuestionsListView, UnansweredQuestionsListView
 
@@ -19,11 +19,10 @@ urlpatterns = [
         path('user/<int:user_pk>/question/<int:question_pk>/', include([
             path('edit/', QuestionEditView.as_view(), name='question-edit'),
             path('delete/', QuestionDeleteView.as_view(), name='question-delete'),
-            # ])),
-
+            path('details/', MyQuestionDetailView.as_view(), name='my-question-details'),
         ])),
-        path('patient/<int:user_pk>/list/', MyQuestionsListView.as_view(), name='question-list' ),
-        path('pharmacist/<int:user_pk>/list/', UnansweredQuestionsListView.as_view(), name='question-list-unanswered' ),
+        path('patient/<int:user_pk>/list/', MyQuestionsListView.as_view(), name='my-question-list'),
+        path('pharmacist/<int:user_pk>/list/', UnansweredQuestionsListView.as_view(), name='unanswered-question-list'),
     ])),
     path('answers/', include([
         path('question/<int:question_pk>/create/', AnswerCreateView.as_view(), name='answer-create'),

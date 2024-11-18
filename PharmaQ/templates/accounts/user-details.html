@@ -1,6 +1,7 @@
 {% extends 'common/base.html' %}
 {% load static %}
 
+
 {% block content %}
 
     <div class="form-outer-container">
@@ -21,12 +22,12 @@
                     </div>  
                     <div class="profile">
             
-{#                        {% if user.is_patient %}#}
-{#                            <h5>Пациент</h5>#}
-{#                        {% elif user.is_pharmacist%}#}
-{#                            <h5>Фармацевт</h5>#}
-{#                        {% endif %}#}
-{#                        <br>#}
+                        {% if user.is_patient %}
+                            <h5>Пациент</h5>
+                        {% elif user.is_pharmacist%}
+                            <h5>Фармацевт</h5>
+                        {% endif %}
+                        <br>
             
                         <div class="profile-data">
                             <span class="profile-title"><b>Username:</b></span>

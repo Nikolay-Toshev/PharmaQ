@@ -46,7 +46,7 @@ class AnswerCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def get_success_url(self):
         user = get_object_or_404(UserModel, pk=self.request.user.pk)
-        return reverse_lazy('question-list-unanswered', kwargs={'user_pk': user.pk})
+        return reverse_lazy('unanswered-question-list', kwargs={'user_pk': user.pk})
 
 
 class AnswerEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

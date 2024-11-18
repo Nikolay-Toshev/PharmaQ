@@ -1,0 +1,63 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="detail-outer-container">
+        <div class="detail-container">
+            <div class="detail-card">
+                
+                <h1 class="detail-title">Details</h1>
+                <div class="primary-detail-card">
+                    <div class="primary-container">
+                        <a href="#"><h6>{{ patient.username }}</h6></a>
+                        <br>
+                        {% if patient.profile_img %}
+                            <div class="primary-img">
+                                <a href="#"><img src="{{ patient.profile_img.url }}" ></a>
+                            </div>
+                        {% else %}
+                            <div class="primary-img">
+                                <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                            </div>
+                        {% endif %}
+                        
+                        </div>
+                        <div class="secondary-container">
+                            <h4 class="primary-title">Question</h4>
+                            <h5 class="question-detail-title">{{ question.title }}</h5>
+                            <h6 class="question-detail-category">{{ question.category_id }}</h6>
+                            <p class="question-detail-content">{{ question.content }}</p>
+                            <br>
+                            {% if request.user == question.creator_id %}
+                            <div class="details-btns">
+                                    <span><a href="{% url 'question-edit' user.pk question.id %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
+                                    <span><a href="{% url 'question-delete' user.pk question.id %}"><i class="fa-solid fa-trash"></i></a></span>
+                            </div>
+                            {% endif %}
+                        </div>    
+                </div>
+                {% if answer %}
+                    <div class="secondary-detail-card">
+                            <div class="primary-container">
+                            <a href="#"><h6>{{ pharmacist.username }}</h6></a>
+                            <br>
+                            {% if pharmacist.profile_img %}
+                                <div class="secondary-img">
+                                    <a href="#"><img src="{{ pharmacist.profile_img.url }}" ></a>
+                                </div>
+                            {% else %}
+                                <div class="secondary-img">
+                                    <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                </div>
+                            {% endif %}
+                            </div>
+                            <div class="secondary-container">
+                                <p class="answer-detail-content">{{ answer.content }}</p>
+                            </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+{% endblock %}

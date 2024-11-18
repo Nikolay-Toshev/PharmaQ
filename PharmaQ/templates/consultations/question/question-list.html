@@ -3,9 +3,6 @@
 {% load check_user_group %}
 {% load question_tags %}
 
-{% block header_title %}
-    <h1>Моите въпроси</h1>
-{% endblock %}
 
 {% block content %}
     
@@ -25,21 +22,13 @@
                 
                             {% if request.user == question.creator_id %}
                                 <div class="details-btns">
-                                    <span><a href="{% url 'question-edit' user.pk question.id %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
-                                    <span><a href="{% url 'question-delete' user.pk question.id %}"><i class="fa-solid fa-trash"></i></a></span>
+                                    <span><a href="{% url 'my-question-details' user.pk question.id %}">Details</a></span>
                                 </div>
                                 {% has_answer question.pk as has_answer %}
                                 {% if has_answer %}
-                                    <div class="profile-details">
-                                    {% get_answer_creator question.pk as answer_creator %}
-                                    <h5>
-                                        {{ answer_creator }}
-                                    </h5>
-                                    {% get_answer_content question.pk as answer_content %}    
-                                    <p>
-                                        {{ answer_content }}
-                                    </p>
-                                    </div>
+                                    <h4>Answered!</h4>
+                                {% else %}
+                                    <h4>Not answered!</h4>
                                 {% endif %}    
                             {% endif %}
                             
