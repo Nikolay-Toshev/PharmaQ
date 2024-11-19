@@ -4,10 +4,10 @@
 
 {% block content %}
 
-    <div class="form-outer-container">
-        <div class="form-container">
-            <div class="form-card">
-                <h1 class="form-title">Details</h1>
+    <div class="detail-outer-container">
+        <div class="detail-container">
+            <div class="detail-card">
+                <h1 class="detail-title">Details</h1>
                 <div class="profile-details">
                     <div class="container">          
                         {% if user.profile_img %}
@@ -19,6 +19,13 @@
                                 <img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
                             </div>
                         {% endif %}
+                        {% if user.is_patient %}
+                            <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>
+                        {% elif user.is_pharmacist %}
+                            <a href="{% url 'pharmacist-edit' user.pk %}" class="profile-btn">Редактирай</a>
+                        {% endif %}
+                        <a href="{% url 'password-change' user.pk %}" class="profile-btn">Смени Паролата</a>
+                        <a href="{% url 'user-delete' user.pk %}" class="profile-btn delete">Изтрий</a>
                     </div>  
                     <div class="profile">
             
@@ -66,14 +73,14 @@
 
                         {% endif %}
                         
-                        {% if user.is_patient %}
-                            <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>
-                        {% elif user.is_pharmacist %}
-                            <a href="{% url 'pharmacist-edit' user.pk %}" class="profile-btn">Редактирай</a>
-                        {% endif %}
-                        <a href="{% url 'password-change' user.pk %}" class="profile-btn">Смени Паролата</a>
-                        <a href="{% url 'user-delete' user.pk %}" class="profile-btn delete">Изтрий</a>
-            
+{#                        {% if user.is_patient %}#}
+{#                            <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>#}
+{#                        {% elif user.is_pharmacist %}#}
+{#                            <a href="{% url 'pharmacist-edit' user.pk %}" class="profile-btn">Редактирай</a>#}
+{#                        {% endif %}#}
+{#                        <a href="{% url 'password-change' user.pk %}" class="profile-btn">Смени Паролата</a>#}
+{#                        <a href="{% url 'user-delete' user.pk %}" class="profile-btn delete">Изтрий</a>#}
+{#            #}
                     </div>
 
                 </div>

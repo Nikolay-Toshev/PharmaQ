@@ -14,7 +14,6 @@ class QuestionCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = QuestionCreateForm
     template_name = 'consultations/question/question-create.html'
 
-
     def form_valid(self, form):
 
         question = form.save(commit=False)
@@ -24,10 +23,8 @@ class QuestionCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
         return response
 
-
     def test_func(self):
         return self.request.user.groups.filter(name__exact='patient').exists()
-
 
     def get_success_url(self):
         return reverse_lazy('my-question-list', kwargs={'user_pk': self.request.user.pk})
@@ -49,7 +46,7 @@ class QuestionEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == user
 
     def get_success_url(self):
-        return reverse_lazy('my-question-list', kwargs={'user_pk': self.kwargs['user_pk']})
+        return reverse_lazy('my-question-details', kwargs={'user_pk': self.kwargs['user_pk'], 'question_pk': self.kwargs['question_pk']})
 
 class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Question
@@ -86,7 +83,7 @@ class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListV
     context_object_name = 'questions'
 
     def get_queryset(self):
-        return Question.objects.filter(answers__isnull=True)
+        return Question.objects.filter_by_is_answered()
 
     def test_func(self):
         return self.request.user.groups.filter(name__exact='pharmacist').exists()

@@ -26,6 +26,15 @@ class QuestionManager(models.Manager):
         question = self.get(pk=question_id)
         return question.answers.exists()
 
+    def filter_by_creator(self, creator_id):
+        return self.filter(creator_id=creator_id)
+
+    def filter_by_is_public(self):
+        return self.filter(is_public=True)
+
+    def filter_by_is_answered(self):
+        return self.filter(answers__isnull=True)
+
 
 class AnswerManager(models.Manager):
 

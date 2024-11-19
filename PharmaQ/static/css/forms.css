@@ -108,7 +108,7 @@ form .answer-details h3 {
 
 .profile-details {
     display: flex;
-    flex-direction: column;
+    gap: 3rem;
 }
 
 .profile {
@@ -140,6 +140,28 @@ form .answer-details h3 {
 }
 
 .profile a:hover {
+    text-decoration: none;
+    background-color: #0d5385;
+}
+
+.profile h5 {
+    /*text-align: center;*/
+}
+
+.profile-details .container a {
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    margin: 1rem 0;
+    transition: background-color 0.3s;
+}
+
+.profile-details .container a:hover {
     text-decoration: none;
     background-color: #0d5385;
 }
