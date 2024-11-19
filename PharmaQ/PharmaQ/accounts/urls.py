@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 from PharmaQ.accounts.views import AppUserLoginView, PatientRegistrationView, PatientEditView, UserDetailView, \
-    AppUserDeleteView, AppUserChangePasswordView, PharmacistRegistrationView, PharmacistEditView
+    AppUserDeleteView, AppUserChangePasswordView, PharmacistRegistrationView, PharmacistEditView, AllPharmacistListView
 
 urlpatterns = [
     path('login/', AppUserLoginView.as_view(), name='login'),
@@ -10,6 +10,7 @@ urlpatterns = [
         path('patient/', PatientRegistrationView.as_view(), name='patient-registration'),
         path('pharmacist/', PharmacistRegistrationView.as_view(), name='pharmacist-registration'),
     ])),
+    path('pharmasists/', AllPharmacistListView.as_view(), name='pharmacist-list-all'),
     path('profile/<int:pk>/', include([
         path('details/', UserDetailView.as_view(), name='user-details'),
         path('edit/patient/', PatientEditView.as_view(), name='patient-edit'),

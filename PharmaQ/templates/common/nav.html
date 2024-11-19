@@ -10,6 +10,7 @@
         <ul class="nav-links">
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'index' %}">Dashboard</a></li>
+                <li><a href="{% url 'pharmacist-list-all' %}">Our pharmacists</a></li>
                 <li>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}

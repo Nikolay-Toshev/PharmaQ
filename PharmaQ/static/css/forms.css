@@ -198,3 +198,16 @@ details p {
 details:not([open]):hover {
     background-color: #007bff;
 }
+
+.search-form{
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.search-form button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    padding: 8px 16px ;
+}

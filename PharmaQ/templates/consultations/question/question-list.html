@@ -6,13 +6,13 @@
 
 {% block content %}
     
-    <div class="form-outer-container">
-        <div class="form-container">
-            <div class="form-card">
+    <div class="list-outer-container">
+        <div class="list-container">
+            <div class="list-card">
                 {% if request.user == question.creator_id %}
-                    <h1 class="form-title">My questions</h1>
+                    <h1 class="list-title">My questions</h1>
                 {% elif request.user|check_user_group:'pharmacist' %}
-                    <h1 class="form-title">Unanswered questions</h1>
+                    <h1 class="list-title">Unanswered questions</h1>
                 {% endif %}
                 <div class="details">
                     {% for question in questions %}
