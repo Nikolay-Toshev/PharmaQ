@@ -12,6 +12,12 @@
                 <li><a href="{% url 'index' %}">Dashboard</a></li>
                 <li><a href="{% url 'pharmacist-list-all' %}">Our pharmacists</a></li>
                 <li>
+                    <form method="post" action="{% url 'send-test-email' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout" >Send Mail</button>
+                    </form>
+                </li>
+                <li>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button type="submit" class="btn-logout" >Logout</button>

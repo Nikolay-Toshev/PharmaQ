@@ -141,6 +141,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Mailjet
+EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+MAILJET_API_KEY = os.getenv('MAILJET_API_KEY')
+MAILJET_API_SECRET = os.getenv('MAILJET_API_SECRET')
+
+
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_SUBJECT_PREFIX = '[PharmaQ]'
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+# EMAIL_HOST = 'in-v3.mailjet.com'
+
+
+
 AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
