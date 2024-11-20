@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from PharmaQ.consultation.forms import QuestionCreateForm, QuestionEditForm
-from PharmaQ.consultation.models import Question, Answer
+from PharmaQ.consultation.models import Question, Answer, Category
 
 UserModel = get_user_model()
 
@@ -69,12 +70,36 @@ class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
 
+    search_fields = ['title', 'content']
+
     def get_queryset(self):
-        return Question.objects.filter(creator_id=self.request.user.id)
+        queryset = Question.objects.filter(creator_id=self.request.user.id)
+        query = self.request.GET.get('q')
+        category_id = self.request.GET.get('category')
+
+        if query and self.search_fields:
+            search_query = Q()
+            for field in self.search_fields:
+                search_query |= Q(**{f'{field}__icontains': query})
+            queryset = queryset.filter(search_query)
+
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+
+        return queryset
 
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
         return self.request.user == user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
+        context['user'] = user
+        context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('q', '')
+        context['selected_category'] = self.request.GET.get('category', '')
+        return context
 
 
 class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
@@ -82,12 +107,35 @@ class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListV
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
 
+    search_fields = ['title', 'content']
+
     def get_queryset(self):
-        return Question.objects.filter_by_is_answered()
+        queryset = Question.objects.filter_by_is_answered()
+        query = self.request.GET.get('q')
+        category_id = self.request.GET.get('category')
+
+        if query and self.search_fields:
+            search_query = Q()
+            for field in self.search_fields:
+                search_query |= Q(**{f'{field}__icontains': query})
+            queryset = queryset.filter(search_query)
+
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+
+        return queryset
 
     def test_func(self):
         return self.request.user.groups.filter(name__exact='pharmacist').exists()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
+        context['user'] = user
+        context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('q', '')
+        context['selected_category'] = self.request.GET.get('category', '')
+        return context
 
 class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Question

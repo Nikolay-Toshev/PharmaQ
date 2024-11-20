@@ -9,15 +9,32 @@
     <div class="list-outer-container">
         <div class="list-container">
             <div class="list-card">
-                {% if request.user == question.creator_id %}
+                {% if request.user == user and request.user|check_user_group:'patient'%}
                     <h1 class="list-title">My questions</h1>
                 {% elif request.user|check_user_group:'pharmacist' %}
                     <h1 class="list-title">Unanswered questions</h1>
                 {% endif %}
                 <div class="details">
+                <div class="search-form-container">
+                    <form method="get" class="search-form">
+                        <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                        <select name="category">
+                            <option value="">All Categories</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>
+                                    {{ category.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
                     {% for question in questions %}
                         <details>
-                            <summary>{{ question.title }}</summary>
+                            <summary>
+                                <h6>{{ question.title }}</h6>
+                                <span>Category: {{ question.category_id.title }}</span>
+                            </summary>
                             <p>{{ question.content }}</p>
                 
                             {% if request.user == question.creator_id %}

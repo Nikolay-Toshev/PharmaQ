@@ -151,3 +151,43 @@
     background-color: #0d5385;
 }
 
+.search-btn {
+    all: unset;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.search-btn:hover {
+    background-color: #0d5385;
+}
+
+.add-image-btn::-webkit-file-upload-button {
+    all: unset;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.add-image-btn::-webkit-file-upload-button:hover {
+    background-color: #0d5385;
+}
+
+.add-image-btn {
+    padding: 0;
+}

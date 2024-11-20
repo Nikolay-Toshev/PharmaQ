@@ -1,12 +1,15 @@
+from unicodedata import category
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from PharmaQ.consultation.forms import AnswerCreateForm, AnswerEditForm
-from PharmaQ.consultation.models import Answer, Question
+from PharmaQ.consultation.models import Answer, Question, Category
 
 UserModel = get_user_model()
 
@@ -96,8 +99,31 @@ class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     template_name = 'consultations/answer/answer-list.html'
     context_object_name = 'answers'
 
+    search_fields = ['content', 'question_id__title']
+
+
     def get_queryset(self):
-        return Answer.objects.filter_by_creator(creator_id=self.request.user.pk)
+        queryset = Answer.objects.filter_by_creator(creator_id=self.request.user.pk)
+        query = self.request.GET.get('q')
+        category_id = self.request.GET.get('category')
+
+        if query and self.search_fields:
+            search_query = Q()
+            for field in self.search_fields:
+                search_query |= Q(**{f'{field}__icontains': query})
+            queryset = queryset.filter(search_query)
+
+        if category_id:
+            queryset = queryset.filter(question_id__category_id=category_id)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('q', '')
+        context['selected_category'] = self.request.GET.get('category', '')
+        return context
 
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
