@@ -271,3 +271,15 @@
     display: block;
     text-align: center;
 }
+
+.comment-container {
+    padding-block: 1rem;
+    border-bottom: 3px solid #dcdcdd;
+    display: flex;
+    gap: 3rem;
+}
+
+.comment-container p {
+    flex-grow: 1;
+    vertical-align: center;
+}

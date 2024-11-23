@@ -57,8 +57,38 @@
                                 <p class="answer-detail-content">{{ answer.content }}</p>
                             </div>
                     </div>
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="comment-container">
+                                {% if comment.author.profile_img %}
+                                    <a href="#"><img src="{{ comment.author.profile_img.url }}" class="comment-img"></a>
+                                {% else %}
+                                    <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" class="comment-img"></a>
+                                {% endif %}
+                                <p>{{ comment.content }}</p>
+                                {% if request.user == comment.author %}
+                                    <div class="details-btns">
+                                        <span><a href="{% url 'comment-edit' comment.id %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
+                                        <span><a href="{% url 'comment-delete' comment.id %}"><i class="fa-solid fa-trash"></i></a></span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="comment-container">
+                            <p>No comments yet</p>
+                        </div>
+                        
+                    {% endif %}
+                    <div class="comment-form-container">
+                            <form method="post" class="comment-form">
+                                {% csrf_token %}
+                                {{ comment_form }}
+                                <button type="submit" class="search-btn"><i class="fa-regular fa-comment"></i></button>
+                            </form>
+                        </div>    
+                    </div>
                 {% endif %}
-            </div>
         </div>
     </div>    
 {% endblock %}

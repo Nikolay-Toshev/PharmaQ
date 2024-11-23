@@ -225,3 +225,16 @@ details:not([open]):hover {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
 }
+
+.comment-form{
+    position: relative;
+    margin: 0 auto;
+    /*padding-bottom: 2rem;*/
+    width: 100%;
+}
+
+.comment-form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}

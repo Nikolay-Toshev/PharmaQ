@@ -11,6 +11,10 @@ class QuestionManager(models.Manager):
         answer_creator = UserModel.objects.get(id=answer.creator_id_id)
         return answer_creator.username
 
+    def get_answer(self, question_id):
+        question = self.get(pk=question_id)
+        return question.answers.get()
+
     def get_question_creator(self, question_id):
         question = self.get(pk=question_id)
         creator = UserModel.objects.get(id=question.creator_id_id)

@@ -2,9 +2,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
+from django.views.generic.edit import FormMixin
+
+from PharmaQ.comments.forms import CommentCreateForm
+from PharmaQ.comments.models import Comment
+from PharmaQ.common.mixins import SearchMixin
 from PharmaQ.consultation.forms import QuestionCreateForm, QuestionEditForm
 from PharmaQ.consultation.models import Question, Answer, Category
 
@@ -65,7 +70,7 @@ class QuestionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return reverse_lazy('my-question-list', kwargs={'user_pk': self.request.user.pk})
 
-class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, ListView):
     model = Question
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
@@ -74,17 +79,7 @@ class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def get_queryset(self):
         queryset = Question.objects.filter(creator_id=self.request.user.id)
-        query = self.request.GET.get('q')
-        category_id = self.request.GET.get('category')
-
-        if query and self.search_fields:
-            search_query = Q()
-            for field in self.search_fields:
-                search_query |= Q(**{f'{field}__icontains': query})
-            queryset = queryset.filter(search_query)
-
-        if category_id:
-            queryset = queryset.filter(category_id=category_id)
+        queryset = self.apply_search_filter(queryset)
 
         return queryset
 
@@ -102,7 +97,7 @@ class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return context
 
 
-class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, ListView):
     model = Question
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
@@ -111,17 +106,7 @@ class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, ListV
 
     def get_queryset(self):
         queryset = Question.objects.filter_by_is_answered()
-        query = self.request.GET.get('q')
-        category_id = self.request.GET.get('category')
-
-        if query and self.search_fields:
-            search_query = Q()
-            for field in self.search_fields:
-                search_query |= Q(**{f'{field}__icontains': query})
-            queryset = queryset.filter(search_query)
-
-        if category_id:
-            queryset = queryset.filter(category_id=category_id)
+        queryset = self.apply_search_filter(queryset)
 
         return queryset
 
@@ -159,10 +144,25 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
             pharmacist = get_object_or_404(UserModel, pk=answer.creator_id_id)
             context['answer'] = answer
             context['pharmacist'] = pharmacist
+            context['comments'] = Comment.objects.filter(answer=answer)
         except Http404:
             pass
 
         context['patient'] = patient
+        context['comment_form'] = CommentCreateForm()
+
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = CommentCreateForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.answer = Question.objects.get_answer(kwargs['question_pk'])
+            comment.author = self.request.user
+            comment.save()
+            return redirect(self.request.META.get('HTTP_REFERER'))
+
+        return self.render_to_response(self.get_context_data(form=form))
+
 

@@ -4,12 +4,15 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
+from PharmaQ.comments.forms import CommentCreateForm
+from PharmaQ.comments.models import Comment
+from PharmaQ.common.mixins import SearchMixin
 from PharmaQ.consultation.forms import AnswerCreateForm, AnswerEditForm
-from PharmaQ.consultation.models import Answer, Question, Category
+from PharmaQ.consultation.models import Answer, Question, Category, answer
 
 UserModel = get_user_model()
 
@@ -35,7 +38,6 @@ class AnswerCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             raise PermissionDenied
 
         return super().dispatch(request, *args, **kwargs)
-
 
     def form_valid(self, form):
         question = get_object_or_404(Question, pk=self.kwargs['question_pk'])
@@ -94,7 +96,7 @@ class AnswerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return reverse_lazy('answer-list', kwargs={'user_pk': self.request.user.pk})
 
 
-class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, ListView):
     model = Answer
     template_name = 'consultations/answer/answer-list.html'
     context_object_name = 'answers'
@@ -104,17 +106,7 @@ class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def get_queryset(self):
         queryset = Answer.objects.filter_by_creator(creator_id=self.request.user.pk)
-        query = self.request.GET.get('q')
-        category_id = self.request.GET.get('category')
-
-        if query and self.search_fields:
-            search_query = Q()
-            for field in self.search_fields:
-                search_query |= Q(**{f'{field}__icontains': query})
-            queryset = queryset.filter(search_query)
-
-        if category_id:
-            queryset = queryset.filter(question_id__category_id=category_id)
+        queryset = self.apply_search_filter(queryset)
 
         return queryset
 
@@ -154,6 +146,18 @@ class MyAnswerDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         context['pharmacist'] = pharmacist
         context['question'] = question
         context['patient'] = patient
+        context['comment_form'] = CommentCreateForm()
+        context['comments'] = Comment.objects.filter(answer=self.object)
 
         return context
 
+    def post(self, request, *args, **kwargs):
+        form = CommentCreateForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.answer = Answer.objects.get(pk=self.kwargs['answer_pk'])
+            comment.author = self.request.user
+            comment.save()
+            return redirect(self.request.META.get('HTTP_REFERER'))
+
+        return self.render_to_response(self.get_context_data(form=form))
