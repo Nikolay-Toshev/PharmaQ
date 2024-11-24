@@ -238,6 +238,7 @@
     flex-grow: 1;
 }
 
+
 .answer-detail-content {
     font-weight: 500;
 }
@@ -283,4 +284,12 @@
 .comment-container p {
     flex-grow: 1;
     vertical-align: center;
+}
+
+.message-container {
+    margin-top: 2rem;
+}
+
+.message-container .message {
+    text-align: start;
 }

@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 from PharmaQ.accounts.forms import AppUserRegistrationForm
 from PharmaQ.accounts.forms.pharmacist_forms import PharmacistEditForm
+from PharmaQ.common.mixins import SearchMixin
 
 UserModel = get_user_model()
 
@@ -47,7 +48,7 @@ class PharmacistEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return reverse_lazy('user-details', kwargs={'pk': patient_id})
 
 
-class AllPharmacistListView(LoginRequiredMixin, ListView):
+class AllPharmacistListView(LoginRequiredMixin, SearchMixin, ListView):
     model = UserModel
     template_name = 'accounts/pharmacist-list-all.html'
     context_object_name = 'all_pharmacists'
@@ -56,13 +57,14 @@ class AllPharmacistListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self, **kwargs):
         queryset = UserModel.objects.filter(is_pharmacist=True)
-        query = self.request.GET.get('q')
-        if query and self.search_fields:
-            search_query = Q()
-            for field in self.search_fields:
-                search_query |= Q(**{f'{field}__icontains': query})
-            queryset = queryset.filter(search_query)
+        queryset = self.apply_search_filter(queryset)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
+    
 
 
 

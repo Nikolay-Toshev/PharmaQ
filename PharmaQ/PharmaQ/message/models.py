@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from PharmaQ.message.managers import MessageManager
+
 UserModel = get_user_model()
 class Message(models.Model):
 
@@ -23,4 +25,6 @@ class Message(models.Model):
     is_read = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created_at', 'is_read']
+        ordering = ['is_read', '-created_at']
+
+    objects = MessageManager()

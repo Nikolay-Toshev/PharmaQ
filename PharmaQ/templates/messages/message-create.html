@@ -6,7 +6,9 @@
     <div class="form-outer-container">
         <div class="form-container">
             <div class="form-card">
-                <h1 class="form-title">Ask a question</h1>
+                <h1 class="form-title">Send message</h1>
+                <p>To: {{ receiver.username }}</p>
+                <br>
                 <form method="post">
                     {% csrf_token %}
                     {{ form }}

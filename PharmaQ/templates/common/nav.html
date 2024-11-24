@@ -27,6 +27,8 @@
                     <a href="#">Profile</a>
                     <ul class="dropdown-menu">
                          <li><a href="{% url 'user-details' request.user.pk %}">Profile details</a></li>
+                         <li><a href="{% url 'sent-message-list' request.user.pk %}">Sent messages</a></li>
+                         <li><a href="{% url 'received-message-list' request.user.pk %}">Received messages</a></li>
                         {% if request.user|check_user_group:"patient" %}
                             <li><a href="{% url 'my-question-list' request.user.pk %}">My questions</a></li>
                             <li><a href="{% url 'question-create' %}">Ask question</a></li>

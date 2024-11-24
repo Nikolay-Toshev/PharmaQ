@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include('PharmaQ.accounts.urls')),
     path('consultations/', include('PharmaQ.consultation.urls')),
     path('comments/', include('PharmaQ.comments.urls')),
+    path('messages/', include('PharmaQ.message.urls')),
 ]
 
 if settings.DEBUG:

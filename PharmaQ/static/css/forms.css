@@ -238,3 +238,7 @@ details:not([open]):hover {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
 }
+
+.form-textarea {
+    padding: 1rem;
+}

@@ -1,5 +1,6 @@
 {% extends 'common/base.html' %}
 {% load static %}
+{% load check_user_group %}
 
 
 {% block content %}
@@ -9,7 +10,7 @@
             <div class="detail-card">
                 <h1 class="detail-title">Details</h1>
                 <div class="profile-details">
-                    <div class="container">          
+                    <div class="container">
                         {% if user.profile_img %}
                             <div class="profile-img">
                                 <img src="{{ user.profile_img.url }}">
@@ -19,23 +20,25 @@
                                 <img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
                             </div>
                         {% endif %}
-                        <a href="" class="profile-btn">Изпрати съобщение</a>
-                    </div>  
+                        {% if request.user|check_user_group:'patient' %}
+                            <a href="{% url 'message-create' user.id %}" class="profile-btn">Изпрати съобщение</a>
+                        {% endif %}
+                    </div>
                     <div class="profile">
-            
+
                         {% if user.is_patient %}
                             <h5>Пациент</h5>
                         {% elif user.is_pharmacist%}
                             <h5>Фармацевт</h5>
                         {% endif %}
                         <br>
-            
+
                         <div class="profile-data">
                             <span class="profile-title"><b>Username:</b></span>
                             <span class="profile-content">{{ user.username }}</span>
                         </div>
-            
-            
+
+
                         <div class="profile-data">
                             <span class="profile-title"><b>First Name:</b></span>
                             {% if user.first_name %}
@@ -43,8 +46,8 @@
                             {% else %}
                                 <span class="profile-content"> N / A</span>
                             {% endif %}
-                        </div> 
-            
+                        </div>
+
                         <div class="profile-data">
                             <span class="profile-title"><b>Last Name:</b></span>
                             {% if user.last_name %}
@@ -53,7 +56,7 @@
                                 <span class="profile-content"> N / A</span>
                             {% endif %}
                         </div>
-            
+
                         {% if user.is_pharmacist and user.personal_info%}
                              <div class="profile-data">
                                 <span class="profile-title"><b>Personal Info:</b></span>
@@ -61,13 +64,13 @@
                             </div>
 
                         {% endif %}
-                    
+
                     </div>
 
                 </div>
-                
+
                 </div>
             </div>
         </div>
-    
+
 {% endblock %}
