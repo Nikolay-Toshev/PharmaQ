@@ -19,13 +19,7 @@
                                 <img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
                             </div>
                         {% endif %}
-                        {% if user.is_patient %}
-                            <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>
-                        {% elif user.is_pharmacist %}
-                            <a href="{% url 'pharmacist-edit' user.pk %}" class="profile-btn">Редактирай</a>
-                        {% endif %}
-                        <a href="{% url 'password-change' user.pk %}" class="profile-btn">Смени Паролата</a>
-                        <a href="{% url 'user-delete' user.pk %}" class="profile-btn delete">Изтрий</a>
+                        <a href="" class="profile-btn">Изпрати съобщение</a>
                     </div>  
                     <div class="profile">
             
@@ -39,11 +33,6 @@
                         <div class="profile-data">
                             <span class="profile-title"><b>Username:</b></span>
                             <span class="profile-content">{{ user.username }}</span>
-                        </div>
-            
-                        <div class="profile-data">
-                            <span class="profile-title"><b>Email:</b></span>
-                            <span class="profile-content">{{ user.email }}</span>
                         </div>
             
             

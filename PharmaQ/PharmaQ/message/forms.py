@@ -1,6 +1,6 @@
 from django import forms
 
-from PharmaQ.messages.models import Message
+from PharmaQ.message.models import Message
 
 
 class MessageBaseForm(forms.ModelForm):
@@ -10,7 +10,7 @@ class MessageBaseForm(forms.ModelForm):
         widgets = {
             'content': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter your messages',
+                'placeholder': 'Enter your message',
             }),
         }
         labels = {

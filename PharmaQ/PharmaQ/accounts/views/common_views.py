@@ -43,3 +43,13 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         return self.request.user == user
 
 
+class PublicUserDetailView(LoginRequiredMixin, DetailView):
+    model = UserModel
+    template_name = 'accounts/user-details-public.html'
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        return user
+
+

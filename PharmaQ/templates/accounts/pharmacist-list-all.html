@@ -21,21 +21,34 @@
                         {% for pharmacist in all_pharmacists %}
                             <div class="primary-detail-card">
                                 <div class="primary-container">
-                                <a href="#"><h6>{{ pharmacist.username }}</h6></a>
-                                <br>
-                                {% if pharmacist.profile_img %}
-                                    <div class="primary-img">
-                                        <a href="#"><img src="{{ pharmacist.profile_img.url }}" ></a>
-                                    </div>
+                                {% if request.user == pharmacist %}
+                                    <a href="{% url 'user-details' request.user.id %}"><h6>{{ pharmacist.username }}</h6></a>
+                                    <br>
+                                    {% if pharmacist.profile_img %}
+                                        <div class="primary-img">
+                                            <a href="{% url 'user-details' request.user.id %}"><img src="{{ pharmacist.profile_img.url }}" ></a>
+                                        </div>
+                                    {% else %}
+                                        <div class="primary-img">
+                                            <a href="{% url 'user-details' request.user.id %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                        </div>
+                                    {% endif %}
                                 {% else %}
-                                    <div class="primary-img">
-                                        <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
-                                    </div>
+                                    <a href="{% url 'user-public-details' pharmacist.id %}"><h6>{{ pharmacist.username }}</h6></a>
+                                    <br>
+                                    {% if pharmacist.profile_img %}
+                                        <div class="primary-img">
+                                            <a href="{% url 'user-public-details' pharmacist.id %}"><img src="{{ pharmacist.profile_img.url }}" ></a>
+                                        </div>
+                                    {% else %}
+                                        <div class="primary-img">
+                                            <a href="{% url 'user-public-details' pharmacist.id %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                                 
                                 </div>
                                 <div class="secondary-container">
-{#                                    <h4 class="primary-title">Details</h4>#}
                                     {% if pharmacist.first_name and pharmacist.last_name %}
                                         <h6>{{ pharmacist.first_name }} {{ pharmacist.last_name }}</h6>
                                     {% else %}

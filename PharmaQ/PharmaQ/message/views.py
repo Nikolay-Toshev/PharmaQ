@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
 
-from PharmaQ.messages.forms import MessageCreateForm
-from PharmaQ.messages.models import Message
+from PharmaQ.message.forms import MessageCreateForm
+from PharmaQ.message.models import Message
 
 
 class MessageCreateView(CreateView):
