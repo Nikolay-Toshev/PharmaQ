@@ -274,6 +274,7 @@
 
 .comment-container {
     padding-block: 1rem;
+    padding-right: 2rem;
     border-bottom: 3px solid #dcdcdd;
     display: flex;
     gap: 3rem;

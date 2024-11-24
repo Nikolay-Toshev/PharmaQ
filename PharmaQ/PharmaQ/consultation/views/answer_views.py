@@ -77,7 +77,7 @@ class AnswerEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return user == answer_to_edit.creator_id
 
     def get_success_url(self):
-        return reverse_lazy('answer-list', kwargs={'user_pk': self.request.user.pk})
+        return reverse_lazy('my-answer-details', kwargs={'user_pk': self.request.user.pk, 'answer_pk': self.kwargs['answer_pk']})
 
 class AnswerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Answer
