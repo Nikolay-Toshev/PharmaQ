@@ -229,7 +229,6 @@ details:not([open]):hover {
 .comment-form{
     position: relative;
     margin: 0 auto;
-    /*padding-bottom: 2rem;*/
     width: 100%;
 }
 
@@ -242,3 +241,11 @@ details:not([open]):hover {
 .form-textarea {
     padding: 1rem;
 }
+
+.rating-forms {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+}
+
+

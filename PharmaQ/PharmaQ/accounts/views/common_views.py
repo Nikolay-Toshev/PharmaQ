@@ -4,8 +4,10 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView, UpdateView
+from urllib3 import request
 
 from PharmaQ.accounts.forms import PatientEditForm
+from PharmaQ.rating.models import Rating
 
 UserModel = get_user_model()
 
@@ -41,6 +43,17 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         return self.request.user == user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        if user.is_pharmacist:
+            likes = Rating.objects.filter(answer_id__creator_id=user, like__exact=True).count()
+            dislikes = Rating.objects.filter(answer_id__creator_id=user, dislike__exact=True).count()
+            rating =  likes - dislikes
+            context['rating'] = rating
+        return context
+
 
 
 class PublicUserDetailView(LoginRequiredMixin, DetailView):

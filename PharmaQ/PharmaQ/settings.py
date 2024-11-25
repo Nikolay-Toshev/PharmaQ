@@ -39,6 +39,7 @@ CUSTOM_APPS = [
     'PharmaQ.consultation.apps.ConsultationsConfig',
     'PharmaQ.comments.apps.CommentsConfig',
     'PharmaQ.message.apps.MessageConfig',
+    'PharmaQ.rating.apps.RatingConfig',
 ]
 
 INSTALLED_APPS = [

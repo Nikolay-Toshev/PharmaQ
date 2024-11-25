@@ -1,17 +1,18 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
-from django.views.generic.edit import FormMixin
+
 
 from PharmaQ.comments.forms import CommentCreateForm
 from PharmaQ.comments.models import Comment
 from PharmaQ.common.mixins import SearchMixin
 from PharmaQ.consultation.forms import QuestionCreateForm, QuestionEditForm
 from PharmaQ.consultation.models import Question, Answer, Category
+from PharmaQ.rating.forms import LikeForm, DislikeForm
+from PharmaQ.rating.models import Rating
 
 UserModel = get_user_model()
 
@@ -145,17 +146,24 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
             context['answer'] = answer
             context['pharmacist'] = pharmacist
             context['comments'] = Comment.objects.filter(answer=answer)
+            context['like_form'] = LikeForm()
+            context['dislike_form'] = DislikeForm()
+            context['rating'] = Rating.objects.filter(answer_id=answer).first()
         except Http404:
             pass
 
         context['patient'] = patient
         context['comment_form'] = CommentCreateForm()
 
-
         return context
 
     def post(self, request, *args, **kwargs):
+        answer = get_object_or_404(Answer, question_id_id=self.kwargs['question_pk'])
         form = CommentCreateForm(request.POST)
+        like_form = LikeForm(request.POST)
+        dislike_form = DislikeForm(request.POST)
+        form_type = request.POST.get('form_type')
+
         if form.is_valid():
             comment = form.save(commit=False)
             comment.answer = Question.objects.get_answer(kwargs['question_pk'])
@@ -163,6 +171,42 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
             comment.save()
             return redirect(self.request.META.get('HTTP_REFERER'))
 
-        return self.render_to_response(self.get_context_data(form=form))
+        if form_type == 'like_form':
+            try:
+                rating = Rating.objects.get(answer_id=answer, patient_id=request.user)
+                if rating.like:
+                    rating.like = False
+                else:
+                    rating.like = True
+                    if rating.dislike:
+                        rating.dislike = False
+                rating.save()
+            except Rating.DoesNotExist:
+                rating = like_form.save(commit=False)
+                rating.like = True
+                rating.answer_id = answer
+                rating.patient_id = request.user
+                rating.save()
 
+            return redirect(self.request.META.get('HTTP_REFERER'))
 
+        if form_type == 'dislike_form':
+            try:
+                rating = Rating.objects.get(answer_id=answer, patient_id=request.user)
+                if rating.dislike:
+                    rating.dislike = False
+                else:
+                    rating.dislike = True
+                    if rating.like:
+                        rating.like = False
+                rating.save()
+            except Rating.DoesNotExist:
+                rating = dislike_form.save(commit=False)
+                rating.dislike = True
+                rating.answer_id = answer
+                rating.patient_id = request.user
+                rating.save()
+
+            return redirect(self.request.META.get('HTTP_REFERER'))
+
+        # return self.render_to_response(self.get_context_data(form=form))

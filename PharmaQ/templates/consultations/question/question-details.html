@@ -53,8 +53,33 @@
                             {% endif %}
                             </div>
                             <div class="secondary-container">
+
                                 <h4 class="primary-title">Answer</h4>
                                 <p class="answer-detail-content">{{ answer.content }}</p>
+                                <div class="rating-forms">
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        {{ like_form }}
+                                        <button type="submit" class="like-btn">
+                                            {% if rating.like %}
+                                                <i class="fa-solid fa-thumbs-up"></i>
+                                            {% else %}
+                                                <i class="fa-regular fa-thumbs-up"></i>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        {{ dislike_form }}
+                                        <button type="submit" class="like-btn">
+                                            {% if rating.dislike %}
+                                                <i class="fa-solid fa-thumbs-down"></i>
+                                            {% else %}
+                                                <i class="fa-regular fa-thumbs-down"></i>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                     </div>
                     {% if comments %}

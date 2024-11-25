@@ -4,6 +4,7 @@ from django.db import models
 from PharmaQ.message.managers import MessageManager
 
 UserModel = get_user_model()
+
 class Message(models.Model):
 
     content = models.CharField(max_length=200)
