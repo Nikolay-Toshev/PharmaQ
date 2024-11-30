@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load url_query_and_pagination %}
 {% load static %}
 
 {% block content %}
@@ -83,6 +84,27 @@
                             {% endif %}
                         </div>
                     {% endfor %}
+                    <div class="pagination">
+                        <div class="previous">
+                            {% if paginated_chapters.has_previous %}
+                                <a href="?{% url_query_and_pagination request 'page' paginated_chapters.previous_page_number %}" class="paginator-btn">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="current">
+                            {% if paginated_chapters.has_previous or  paginated_chapters.has_next %}
+                                <span>Page {{ paginated_chapters.number }} of {{ paginated_chapters.paginator.num_pages }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="next">
+                            {% if paginated_chapters.has_next %}
+                                <a href="?{% url_query_and_pagination request 'page' paginated_chapters.next_page_number %}" class="paginator-btn">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% else %}
                     <div class="comment-container">
                         <p>No comments yet</p>
@@ -90,14 +112,14 @@
                     
                 {% endif %}
                 <div class="comment-form-container">
-                        <form method="post" class="comment-form">
-                            {% csrf_token %}
-                            {{ comment_form }}
-                            <button type="submit" class="search-btn"><i class="fa-regular fa-comment"></i></button>
-                        </form>
-                    </div>    
-                </div>
+                    <form method="post" class="comment-form">
+                        {% csrf_token %}
+                        {{ comment_form }}
+                        <button type="submit" class="search-btn"><i class="fa-regular fa-comment"></i></button>
+                    </form>
+                </div>  
+               
             </div>
         </div>
-    </div>    
+    </div>
 {% endblock %}

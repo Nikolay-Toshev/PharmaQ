@@ -75,6 +75,7 @@ class MyQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, 
     model = Question
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
+    paginate_by = 10
 
     search_fields = ['title', 'content']
 
@@ -102,6 +103,7 @@ class UnansweredQuestionsListView(LoginRequiredMixin, UserPassesTestMixin, Searc
     model = Question
     template_name = 'consultations/question/question-list.html'
     context_object_name = 'questions'
+    paginate_by = 10
 
     search_fields = ['title', 'content']
 

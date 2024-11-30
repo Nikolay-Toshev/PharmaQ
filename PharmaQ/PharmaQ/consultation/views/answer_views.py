@@ -1,13 +1,11 @@
-from unicodedata import category
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q
+from django.core.paginator import Paginator
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
-
 from PharmaQ.comments.forms import CommentCreateForm
 from PharmaQ.comments.models import Comment
 from PharmaQ.common.mixins import SearchMixin
@@ -100,8 +98,9 @@ class AnswerListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, ListV
     model = Answer
     template_name = 'consultations/answer/answer-list.html'
     context_object_name = 'answers'
+    paginate_by = 10
 
-    search_fields = ['content', 'question_id__title']
+    search_fields = ['content', 'question_id__title', 'question_id__category_id__title']
 
 
     def get_queryset(self):
@@ -126,6 +125,7 @@ class MyAnswerDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Answer
     context_object_name = 'answer'
     template_name = 'consultations/answer/answer-details.html'
+    paginate_by = 2
 
     def get_object(self, queryset=None):
         user_pk = self.kwargs['user_pk']
@@ -147,7 +147,18 @@ class MyAnswerDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         context['question'] = question
         context['patient'] = patient
         context['comment_form'] = CommentCreateForm()
-        context['comments'] = Comment.objects.filter(answer=self.object)
+        comments = Comment.objects.filter(answer=self.object)
+        context['comments'] = comments
+
+        paginator = Paginator(comments, 2) # need to be fixed
+        page = self.request.GET.get('page')
+
+        try:
+            paginated_chapters = paginator.get_page(page)
+        except:
+            raise Http404()
+
+        context['paginated_chapters'] = paginated_chapters
 
         return context
 

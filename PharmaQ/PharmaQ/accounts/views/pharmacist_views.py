@@ -8,7 +8,6 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 from PharmaQ.accounts.forms import AppUserRegistrationForm
 from PharmaQ.accounts.forms.pharmacist_forms import PharmacistEditForm
-from PharmaQ.accounts.utils import get_pharmacist_rating
 from PharmaQ.common.mixins import SearchMixin
 
 UserModel = get_user_model()
@@ -58,6 +57,7 @@ class AllPharmacistListView(LoginRequiredMixin, SearchMixin, ListView):
     model = UserModel
     template_name = 'accounts/pharmacist-list-all.html'
     context_object_name = 'all_pharmacists'
+    paginate_by = 5
 
     search_fields = ['username', 'first_name', 'last_name']
 
@@ -82,6 +82,7 @@ class UnapprovedPharmacistListView(LoginRequiredMixin, UserPassesTestMixin, List
     model = UserModel
     template_name = 'accounts/pharmacist-approve.html'
     context_object_name = 'all_pharmacists'
+    paginate_by = 5
 
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])

@@ -4,6 +4,7 @@
 {% load check_user_group %}
 {% load question_tags %}
 {% load calculate_rating %}
+{% load url_query_and_pagination %}
 
 
 {% block content %}
@@ -12,6 +13,7 @@
         <div class="list-container">
 
             <div class="list-card">
+            
                 <h1 class="list-title">Our Pharmacists</h1>
                     <div class="search-form-container">
                         <form method="get" class="search-form">
@@ -70,6 +72,27 @@
                                 </div>    
                         </div>
                     {% endfor %}
+                </div>
+                <div class="pagination">
+                    <div class="previous">
+                        {% if page_obj.has_previous %}
+                            <a href="?{% url_query_and_pagination request 'page' page_obj.previous_page_number %}" class="paginator-btn">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="current">
+                        {% if page_obj.has_previous or  page_obj.has_next %}
+                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="next">
+                        {% if page_obj.has_next %}
+                            <a href="?{% url_query_and_pagination request 'page' page_obj.next_page_number %}" class="paginator-btn">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

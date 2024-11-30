@@ -43,6 +43,7 @@ class CategoryListView(LoginRequiredMixin, SearchMixin, ListView):
     model = Category
     template_name = 'consultations/category/category-list.html'
     context_object_name = 'categories'
+    paginate_by = 10
 
     search_fields = ['title']
 

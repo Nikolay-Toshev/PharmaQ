@@ -102,3 +102,19 @@
 .approve-btn:hover {
     background-color: #0d5385;
 }
+
+.paginator-btn {
+    all: unset;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.paginator-btn:hover {
+    background-color: #0d5385;
+}
