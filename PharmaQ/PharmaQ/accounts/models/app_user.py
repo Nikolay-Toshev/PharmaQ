@@ -11,7 +11,7 @@ class AppUser(AbstractUser):
 
     is_pharmacist = models.BooleanField(default=False)
 
-    is_approved = models.BooleanField(default=False)
+    professional_card = models.ImageField(upload_to="professional_cards/", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk:

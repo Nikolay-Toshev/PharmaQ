@@ -1,18 +1,23 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, DetailView, UpdateView
-from urllib3 import request
+from django.views.generic import DeleteView, DetailView
 
-from PharmaQ.accounts.forms import PatientEditForm
 from PharmaQ.rating.models import Rating
 
 UserModel = get_user_model()
 
-class AppUserLoginView(LoginView):
+class AppUserLoginView(LoginView, UserPassesTestMixin):
     template_name = 'accounts/login.html'
+
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.request.user.id)
+        return user.is_active
+
+    def handle_no_permission(self):
+        return redirect('index')
 
 
 class AppUserChangePasswordView(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView):

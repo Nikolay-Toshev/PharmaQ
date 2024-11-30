@@ -21,7 +21,6 @@ class PatientRegistrationView(CreateView):
         group = Group.objects.get(name='patient')
 
         patient = form.save(commit=False)
-        patient.is_approved = True
         patient.is_patient = True
         patient.is_pharmacist = False
 

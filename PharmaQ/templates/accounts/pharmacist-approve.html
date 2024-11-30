@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="detail-outer-container">
+        <div class="detail-container">
+            <div class="detail-card">
+                
+                <h1 class="detail-title">New Pharmacists</h1>
+                
+                {% if not all_pharmacists %}
+                    <h6 class="pharm-approve">There is no Pharmacists to approve!</h6>
+                {% endif %}
+                
+                {% for pharmacist in all_pharmacists %}
+                    <div class="primary-detail-card">
+                        <div class="primary-container">
+                            <a href="{% url 'user-public-details' pharmacist.pk %}"><h6>{{ pharmacist.username }}</h6></a>
+                            <br>
+                                <div class="primary-img">
+                                    <a href="{% url 'user-public-details' pharmacist.pk %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                
+                                </div>
+                        </div>
+                        <div class="secondary-container">
+                            
+                            <div class="professional_card">
+                                <img src="{{ pharmacist.professional_card.url }}">
+                            </div>
+                            <div class="approve-forms">
+                                <form method="post" action="{% url 'pharmacist-approve' pk=pharmacist.id %}">
+                                    {% csrf_token %}
+                                    <button class="approve-btn">Approve</button>
+                                </form>    
+                            </div>    
+                        </div>
+                    </div>
+                {% endfor %}
+            
+            </div>
+        </div>
+    </div>    
+{% endblock %}

@@ -10,15 +10,15 @@
                 <h1 class="detail-title">Details</h1>
                 <div class="primary-detail-card">
                     <div class="primary-container">
-                        <a href="#"><h6>{{ pharmacist.username }}</h6></a>
+                        <a href="{% url 'user-details' pharmacist.pk %}"><h6>{{ pharmacist.username }}</h6></a>
                         <br>
                         {% if pharmacist.profile_img %}
                             <div class="primary-img">
-                                <a href="#"><img src="{{ pharmacist.profile_img.url }}" ></a>
+                                <a href="{% url 'user-details' pharmacist.pk %}"><img src="{{ pharmacist.profile_img.url }}" ></a>
                             </div>
                         {% else %}
                             <div class="primary-img">
-                                <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                <a href="{% url 'user-details' pharmacist.pk %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
                             </div>
                         {% endif %}
                         
@@ -38,15 +38,15 @@
                 </div>
                 <div class="secondary-detail-card">
                         <div class="primary-container">
-                        <a href="#"><h6>{{ patient.username }}</h6></a>
+                        <a href="{% url 'user-public-details' patient.pk %}"><h6>{{ patient.username }}</h6></a>
                         <br>
                         {% if patient.profile_img %}
                             <div class="secondary-img">
-                                <a href="#"><img src="{{ patient.profile_img.url }}" ></a>
+                                <a href="{% url 'user-public-details' patient.pk %}"><img src="{{ patient.profile_img.url }}" ></a>
                             </div>
                         {% else %}
                             <div class="secondary-img">
-                                <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                <a href="{% url 'user-public-details' patient.pk %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
                             </div>
                         {% endif %}
                         </div>
@@ -61,10 +61,18 @@
                 {% if comments %}
                     {% for comment in comments %}
                         <div class="comment-container">
-                            {% if comment.author.profile_img %}
-                                <a href="#"><img src="{{ comment.author.profile_img.url }}" class="comment-img"></a>
+                            {% if comment.author == request.user %}
+                                {% if comment.author.profile_img %}
+                                    <a href="{% url 'user-details' comment.author.pk %}"><img src="{{ comment.author.profile_img.url }}" class="comment-img"></a>
+                                {% else %}
+                                    <a href="{% url 'user-details' comment.author.pk %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" class="comment-img"></a>
+                                {% endif %}
                             {% else %}
-                                <a href="#"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" class="comment-img"></a>
+                                {% if comment.author.profile_img %}
+                                    <a href="{% url 'user-public-details' comment.author.pk %}"><img src="{{ comment.author.profile_img.url }}" class="comment-img"></a>
+                                {% else %}
+                                    <a href="{% url 'user-public-details' comment.author.pk %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" class="comment-img"></a>
+                                {% endif %}
                             {% endif %}
                             <p>{{ comment.content }}</p>
                             {% if request.user == comment.author %}

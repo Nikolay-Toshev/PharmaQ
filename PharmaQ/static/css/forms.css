@@ -248,4 +248,12 @@ details:not([open]):hover {
     gap: 1rem;
 }
 
+.approve-forms {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+}
 
+.login a:hover {
+    text-decoration: none;
+}

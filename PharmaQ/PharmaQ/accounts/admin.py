@@ -14,7 +14,7 @@ class UserModelAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username','email', 'password')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_approved', 'groups', 'user_permissions', )}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'groups', 'user_permissions', 'is_pharmacist', 'is_patient')}),
         ('Important dates', {'fields': ('last_login',)}),
     )
 
