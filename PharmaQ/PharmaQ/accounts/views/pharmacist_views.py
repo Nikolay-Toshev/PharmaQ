@@ -67,7 +67,8 @@ class AllPharmacistListView(LoginRequiredMixin, SearchMixin, ListView):
                     .annotate(likes=Count('answers__ratings', filter=Q(answers__ratings__like=True))
                               ,dislikes=Count('answers__ratings', filter=Q(answers__ratings__dislike=True)))
                     .annotate(rating=F('likes') - F('dislikes'))
-                    .order_by('-rating'))
+                    .annotate(all_answers=Count('answers'))
+                    .order_by('-rating', '-all_answers'))
         queryset = self.apply_search_filter(queryset)
         return queryset
 

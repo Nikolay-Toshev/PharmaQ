@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load all_answers %}
 {% load static %}
 {% load check_user_group %}
 {% load question_tags %}
@@ -51,7 +52,9 @@
                                         </div>
                                     {% endif %}
                                 {% endif %}
-                                
+                                 <div class="rating">
+                                    <p>answers <b>{% get_all_answers %}</b></p>
+                                </div>
                                 </div>
                                 <div class="secondary-container">
                                     {% if pharmacist.first_name and pharmacist.last_name %}

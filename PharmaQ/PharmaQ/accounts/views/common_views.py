@@ -54,6 +54,7 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         if user.is_pharmacist:
             context['rating'] = get_pharmacist_rating(user)
+            context['answers'] = user.answers.count()
         return context
 
 
@@ -72,6 +73,7 @@ class PublicUserDetailView(LoginRequiredMixin, DetailView):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         if user.is_pharmacist:
             context['rating'] = get_pharmacist_rating(user)
+            context['answers'] = user.answers.count()
         return context
 
 
