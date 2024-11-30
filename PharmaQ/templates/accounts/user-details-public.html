@@ -11,6 +11,11 @@
                 <h1 class="detail-title">Details</h1>
                 <div class="profile-details">
                     <div class="container">
+                    {% if user.is_pharmacist %}
+                        <div class="rating">
+                            <p>rating <b>{{ rating }}</b></p>
+                        </div>
+                    {% endif %}
                         {% if user.profile_img %}
                             <div class="profile-img">
                                 <img src="{{ user.profile_img.url }}">

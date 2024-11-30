@@ -2,6 +2,7 @@
 {% load static %}
 {% load check_user_group %}
 {% load question_tags %}
+{% load calculate_rating %}
 
 
 {% block content %}
@@ -20,7 +21,11 @@
                     <div class="details">
                         {% for pharmacist in all_pharmacists %}
                             <div class="primary-detail-card">
+                             
                                 <div class="primary-container">
+                                <div class="rating">
+                                    <p>rating <b>{% calculate_rating %}</b></p>
+                                </div>
                                 {% if request.user == pharmacist %}
                                     <a href="{% url 'user-details' request.user.id %}"><h6>{{ pharmacist.username }}</h6></a>
                                     <br>

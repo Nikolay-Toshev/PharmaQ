@@ -2,11 +2,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import Group
+from django.db.models import Count, Q, F
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 from PharmaQ.accounts.forms import AppUserRegistrationForm
 from PharmaQ.accounts.forms.pharmacist_forms import PharmacistEditForm
+from PharmaQ.accounts.utils import get_pharmacist_rating
 from PharmaQ.common.mixins import SearchMixin
 
 UserModel = get_user_model()
@@ -60,7 +62,12 @@ class AllPharmacistListView(LoginRequiredMixin, SearchMixin, ListView):
     search_fields = ['username', 'first_name', 'last_name']
 
     def get_queryset(self, **kwargs):
-        queryset = UserModel.objects.filter(groups__name='pharmacist', is_active=True)
+        queryset = (UserModel.objects
+                    .filter(groups__name='pharmacist', is_active=True)
+                    .annotate(likes=Count('answers__ratings', filter=Q(answers__ratings__like=True))
+                              ,dislikes=Count('answers__ratings', filter=Q(answers__ratings__dislike=True)))
+                    .annotate(rating=F('likes') - F('dislikes'))
+                    .order_by('-rating'))
         queryset = self.apply_search_filter(queryset)
         return queryset
 

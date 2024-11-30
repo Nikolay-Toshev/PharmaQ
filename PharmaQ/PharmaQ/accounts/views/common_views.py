@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView
 
-from PharmaQ.rating.models import Rating
+from PharmaQ.accounts.utils import get_pharmacist_rating
 
 UserModel = get_user_model()
 
@@ -53,10 +53,7 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         context = super().get_context_data(**kwargs)
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         if user.is_pharmacist:
-            likes = Rating.objects.filter(answer_id__creator_id=user, like__exact=True).count()
-            dislikes = Rating.objects.filter(answer_id__creator_id=user, dislike__exact=True).count()
-            rating =  likes - dislikes
-            context['rating'] = rating
+            context['rating'] = get_pharmacist_rating(user)
         return context
 
 
@@ -69,5 +66,12 @@ class PublicUserDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         return user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        if user.is_pharmacist:
+            context['rating'] = get_pharmacist_rating(user)
+        return context
 
 

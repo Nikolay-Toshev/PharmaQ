@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class AppUser(AbstractUser):
 
     personal_info = models.TextField(blank=True, null=True)
@@ -19,4 +20,3 @@ class AppUser(AbstractUser):
             if old_profile_img and old_profile_img != self.profile_img:
                 old_profile_img.delete(save=False)
         super().save(*args, **kwargs)
-
