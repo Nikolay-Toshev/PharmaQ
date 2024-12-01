@@ -49,9 +49,8 @@
                         <div class="details-btns">
                              {% if request.user == message.receiver %}
                                 <a href="{% url 'message-create' message.sender.id %}">Answer</a>
-                            {% else %}
-{#                                 <a href="{% url 'message-create' message.receiver.id %}">Answer</a>#}
                             {% endif %}
+                                <a href="{% url 'message-delete' request.user.pk message.pk %}">Delete</a>
                         </div>
                     </div>   
                     <div class="primary-container">

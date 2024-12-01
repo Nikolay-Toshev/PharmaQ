@@ -118,3 +118,27 @@
 .paginator-btn:hover {
     background-color: #0d5385;
 }
+
+.details-btns {
+    display: flex;
+    justify-content: end;
+    gap: 1rem
+;
+}
+
+.details-btns a, .details-btns button {
+    all: unset;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.details-btns a:hover, .details-btns button:hover {
+    background-color: #0d5385;
+    text-decoration: none;
+}

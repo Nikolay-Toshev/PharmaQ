@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
 
 from PharmaQ.common.mixins import SearchMixin
 from PharmaQ.message.forms import MessageCreateForm
@@ -39,6 +39,7 @@ class SentMessageListView(LoginRequiredMixin, SearchMixin, ListView):
     model = Message
     context_object_name = 'all_messages'
     template_name = 'messages/message-sent-list.html'
+    paginate_by = 5
 
     search_fields = ['receiver__username', 'content'] #what should be filtering???
 
@@ -57,6 +58,7 @@ class ReceivedMessageListView(LoginRequiredMixin, SearchMixin, ListView):
     model = Message
     context_object_name = 'all_messages'
     template_name = 'messages/message-received-list.html'
+    paginate_by = 5
 
     search_fields = ['receiver__username', 'content']
 
@@ -85,6 +87,23 @@ class MessageDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
             message.save()
 
         return message
+
+    def test_func(self):
+        message = get_object_or_404(Message, pk=self.kwargs['message_pk'])
+        user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
+        return user == message.receiver or message.sender == user
+
+
+class MessageDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Message
+    template_name = 'messages/message-delete.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        message_pk = self.kwargs['message_pk']
+        return Message.objects.get(pk=message_pk)
+
+
 
     def test_func(self):
         message = get_object_or_404(Message, pk=self.kwargs['message_pk'])

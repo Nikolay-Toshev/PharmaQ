@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="form-outer-container">
+        <div class="form-container">
+            <div class="form-card">
+                <h1 class="form-title">Delete message</h1>
+                
+                <form class="delete-form" method="post">
+                    {% csrf_token %}
+                    <h5>Are you sure want to delete the message?</h5>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
