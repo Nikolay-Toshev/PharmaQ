@@ -150,7 +150,7 @@ class MyAnswerDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         comments = Comment.objects.filter(answer=self.object)
         context['comments'] = comments
 
-        paginator = Paginator(comments, 4) # need to be fixed
+        paginator = Paginator(comments, 4)
         page = self.request.GET.get('page', 1)
 
         try:

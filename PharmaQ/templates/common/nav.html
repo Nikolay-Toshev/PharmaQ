@@ -10,8 +10,12 @@
         <ul class="nav-links">
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'index' %}">Dashboard</a></li>
-                <li><a href="{% url 'pharmacist-list-all' %}">Our pharmacists</a></li>
+                {% if request.user|check_user_group:"patient" or request.user|check_user_group:"pharmacist" %}
+                    <li><a href="{% url 'pharmacist-list-all' %}">Our pharmacists</a></li>
+                {% endif %}    
                 {% if request.user|check_user_group:'site-moderator' %}
+                    <li><a href="{% url 'pharmacists-moderation' request.user.pk %}">All Pharmacists</a></li>
+                    <li><a href="{% url 'patients-moderation' request.user.pk %}">All Patients</a></li>
                     <li><a href="{% url 'approve' request.user.pk %}">Approve Pharmacist</a></li>
                 {% endif %}    
                 <li>
@@ -33,7 +37,6 @@
                             <li><a href="{% url 'answer-list' request.user.pk %}">My answers</a></li>
                             <li><a href="{% url 'unanswered-question-list' request.user.pk %}">Answer question</a></li>
                         {% elif request.user|check_user_group:"site-moderator" %}
-                            <li><a href="#">Approve Pharmacist</a></li>
                             <li><a href="{% url 'category-create' %}">Create category</a></li>
                         {% endif %}  
                         <li><a href="{% url 'category-list' %}">All categories</a></li>

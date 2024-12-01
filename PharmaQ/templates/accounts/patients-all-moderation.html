@@ -1,0 +1,82 @@
+{% extends 'common/base.html' %}
+{% load all_answers %}
+{% load static %}
+{% load check_user_group %}
+{% load question_tags %}
+{% load url_query_and_pagination %}
+
+
+{% block content %}
+
+    <div class="list-outer-container">
+        <div class="list-container">
+
+            <div class="list-card">
+            
+                <h1 class="list-title">All Patients</h1>
+                    <div class="search-form-container">
+                        <form method="get" class="search-form">
+                            <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+                    <div class="details">
+                        {% for patient in all_patients %}
+                            <div class="primary-detail-card">
+                             
+                                <div class="primary-container">
+
+                               
+                                    <a href="{% url 'user-public-details' patient.id %}"><h6>{{ patient.username }}</h6></a>
+                                    <br>
+                                    {% if patient.profile_img %}
+                                        <div class="primary-img">
+                                            <a href="{% url 'user-public-details' patient.id %}"><img src="{{ patient.profile_img.url }}" ></a>
+                                        </div>
+                                    {% else %}
+                                        <div class="primary-img">
+                                            <a href="{% url 'user-public-details' patient.id %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                        </div>
+                                    {% endif %}
+      
+                                </div>
+                                <div class="secondary-container">
+                                    {% if patient.first_name and patient.last_name %}
+                                        <h6>{{ patient.first_name }} {{ patient.last_name }}</h6>
+                                    {% else %}
+                                        <h6>Anonymous</h6>
+                                    {% endif %}
+                                    <br>
+                                    <p>Questions: {{ patient.questions.count }}</p>
+                                    <div class="details-btns">
+                                        <a href="{% url 'message-create' patient.id %}" class="profile-btn">Изпрати съобщение</a>
+                                    </div>
+                                </div>    
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="pagination">
+                    <div class="previous">
+                        {% if page_obj.has_previous %}
+                            <a href="?{% url_query_and_pagination request 'page' page_obj.previous_page_number %}" class="paginator-btn">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="current">
+                        {% if page_obj.has_previous or  page_obj.has_next %}
+                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="next">
+                        {% if page_obj.has_next %}
+                            <a href="?{% url_query_and_pagination request 'page' page_obj.next_page_number %}" class="paginator-btn">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+{% endblock %}

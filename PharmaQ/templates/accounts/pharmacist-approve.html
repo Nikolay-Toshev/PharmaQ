@@ -10,6 +10,13 @@
                 
                 <h1 class="detail-title">New Pharmacists</h1>
                 
+                <div class="search-form-container">
+                    <form method="get" class="search-form">
+                        <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                
                 {% if not all_pharmacists %}
                     <h6 class="pharm-approve">There is no Pharmacists to approve!</h6>
                 {% endif %}

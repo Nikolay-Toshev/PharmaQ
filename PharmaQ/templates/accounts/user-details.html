@@ -25,7 +25,7 @@
                                 <img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}">
                             </div>
                         {% endif %}
-                        {% if user.is_patient %}
+                        {% if user.is_authenticated and not user.is_pharmacist %}
                             <a href="{% url 'patient-edit' user.pk %}" class="profile-btn">Редактирай</a>
                         {% elif user.is_pharmacist %}
                             <a href="{% url 'pharmacist-edit' user.pk %}" class="profile-btn">Редактирай</a>

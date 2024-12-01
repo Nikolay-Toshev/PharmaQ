@@ -5,8 +5,6 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
-
-
 from PharmaQ.comments.forms import CommentCreateForm
 from PharmaQ.comments.models import Comment
 from PharmaQ.common.mixins import SearchMixin
@@ -154,13 +152,13 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
             context['dislike_form'] = DislikeForm()
             context['rating'] = Rating.objects.filter(answer_id=answer).first()
 
-            paginator = Paginator(comments, 4)  # need to be fixed
+            paginator = Paginator(comments, 4)
             page = self.request.GET.get('page', 1)
 
             try:
                 paginated_comments = paginator.page(page)
             except PageNotAnInteger:
-                paginated_comments = paginator.page(1)  # If page is not an integer, show the first page
+                paginated_comments = paginator.page(1)
             except EmptyPage:
                 paginated_comments = paginator.page(paginator.num_pages)
 

@@ -78,11 +78,13 @@ class AllPharmacistListView(LoginRequiredMixin, SearchMixin, ListView):
         return context
 
 
-class UnapprovedPharmacistListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class UnapprovedPharmacistListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, ListView):
     model = UserModel
     template_name = 'accounts/pharmacist-approve.html'
     context_object_name = 'all_pharmacists'
     paginate_by = 5
+
+    search_fields = ['username', 'first_name', 'last_name', 'email']
 
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
@@ -91,6 +93,30 @@ class UnapprovedPharmacistListView(LoginRequiredMixin, UserPassesTestMixin, List
 
     def get_queryset(self, **kwargs):
         queryset = UserModel.objects.filter(groups__name='pharmacist', is_active=False)
+        queryset = self.apply_search_filter(queryset)
+        return queryset
+
+
+class AllPharmacistsModerationListView(LoginRequiredMixin, UserPassesTestMixin, SearchMixin, ListView):
+    model = UserModel
+    template_name = 'accounts/pharmacists-all-moderation.html'
+    context_object_name = 'all_pharmacists'
+    paginate_by = 5
+
+    search_fields = ['username', 'first_name', 'last_name', 'email']
+
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
+        return user.groups.filter(name__exact='site-moderator').exists()
+
+    def get_queryset(self, **kwargs):
+        queryset = (UserModel.objects.filter(groups__name='pharmacist')
+                    .annotate(likes=Count('answers__ratings', filter=Q(answers__ratings__like=True))
+                              ,dislikes=Count('answers__ratings', filter=Q(answers__ratings__dislike=True)))
+                    .annotate(rating=F('likes') - F('dislikes'))
+                    .annotate(all_answers=Count('answers'))
+                    .order_by('-rating', '-all_answers'))
+        queryset = self.apply_search_filter(queryset)
         return queryset
 
 
