@@ -73,3 +73,11 @@
 .navbar .nav-links a:hover {
     background-color: #0d5385;
 }
+
+.notification {
+    background-color: #ff0000;
+}
+
+.notification:hover {
+    background-color: #850d0d;
+}

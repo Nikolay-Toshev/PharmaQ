@@ -1,6 +1,7 @@
 {% load static %}
 {% load check_user_group %}
 {% load check_user_group %}
+{% load unread_messages %}
 
 <nav class="navbar">
     <div class="container">
@@ -41,8 +42,10 @@
                         {% endif %}  
                         <li><a href="{% url 'category-list' %}">All categories</a></li>
                     </ul>
-            </li>
-                
+                </li>
+                {% if request.user|unread_messages %}
+                    <li><a href="{% url 'received-message-list' request.user.pk %}" class="notification">New</a></li>
+                {% endif %}    
             {% else %}
                 <li><a href="{% url 'login' %}">Login/Register</a></li>
             {% endif %}
