@@ -122,8 +122,11 @@
 .details-btns {
     display: flex;
     justify-content: end;
-    gap: 1rem
-;
+    gap: 0.5rem;
+}
+
+.details-btns span{
+    padding: 0;
 }
 
 .details-btns a, .details-btns button {

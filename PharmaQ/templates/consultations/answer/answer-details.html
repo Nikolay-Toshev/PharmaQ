@@ -60,7 +60,7 @@
                         </div>
                 </div>
                 {% if comments %}
-                    {% for comment in comments %}
+                    {% for comment in paginated_comments %}
                         <div class="comment-container">
                             {% if comment.author == request.user %}
                                 {% if comment.author.profile_img %}
@@ -86,20 +86,20 @@
                     {% endfor %}
                     <div class="pagination">
                         <div class="previous">
-                            {% if paginated_chapters.has_previous %}
-                                <a href="?{% url_query_and_pagination request 'page' paginated_chapters.previous_page_number %}" class="paginator-btn">
+                            {% if paginated_comments.has_previous %}
+                                <a href="?{% url_query_and_pagination request 'page' paginated_comments.previous_page_number %}" class="paginator-btn">
                                     <i class="fa-solid fa-arrow-left"></i>
                                 </a>
                             {% endif %}
                         </div>
                         <div class="current">
-                            {% if paginated_chapters.has_previous or  paginated_chapters.has_next %}
-                                <span>Page {{ paginated_chapters.number }} of {{ paginated_chapters.paginator.num_pages }}</span>
+                            {% if paginated_comments.has_previous or  paginated_comments.has_next %}
+                                <span>Page {{ paginated_comments.number }} of {{ paginated_comments.paginator.num_pages }}</span>
                             {% endif %}
                         </div>
                         <div class="next">
-                            {% if paginated_chapters.has_next %}
-                                <a href="?{% url_query_and_pagination request 'page' paginated_chapters.next_page_number %}" class="paginator-btn">
+                            {% if paginated_comments.has_next %}
+                                <a href="?{% url_query_and_pagination request 'page' paginated_comments.next_page_number %}" class="paginator-btn">
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             {% endif %}
@@ -109,7 +109,6 @@
                     <div class="comment-container">
                         <p>No comments yet</p>
                     </div>
-                    
                 {% endif %}
                 <div class="comment-form-container">
                     <form method="post" class="comment-form">
@@ -117,8 +116,7 @@
                         {{ comment_form }}
                         <button type="submit" class="search-btn"><i class="fa-regular fa-comment"></i></button>
                     </form>
-                </div>  
-               
+                </div>
             </div>
         </div>
     </div>

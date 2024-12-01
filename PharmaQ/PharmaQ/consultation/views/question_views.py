@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -145,12 +146,25 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         try:
             answer = get_object_or_404(Answer, question_id_id=self.kwargs['question_pk'])
             pharmacist = get_object_or_404(UserModel, pk=answer.creator_id_id)
+            comments = Comment.objects.filter(answer=answer)
+            context['comments'] = comments
             context['answer'] = answer
             context['pharmacist'] = pharmacist
-            context['comments'] = Comment.objects.filter(answer=answer)
             context['like_form'] = LikeForm()
             context['dislike_form'] = DislikeForm()
             context['rating'] = Rating.objects.filter(answer_id=answer).first()
+
+            paginator = Paginator(comments, 4)  # need to be fixed
+            page = self.request.GET.get('page', 1)
+
+            try:
+                paginated_comments = paginator.page(page)
+            except PageNotAnInteger:
+                paginated_comments = paginator.page(1)  # If page is not an integer, show the first page
+            except EmptyPage:
+                paginated_comments = paginator.page(paginator.num_pages)
+
+            context['paginated_comments'] = paginated_comments
         except Http404:
             pass
 
@@ -210,5 +224,3 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
                 rating.save()
 
             return redirect(self.request.META.get('HTTP_REFERER'))
-
-        # return self.render_to_response(self.get_context_data(form=form))

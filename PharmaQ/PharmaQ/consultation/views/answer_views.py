@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -150,15 +150,17 @@ class MyAnswerDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         comments = Comment.objects.filter(answer=self.object)
         context['comments'] = comments
 
-        paginator = Paginator(comments, 2) # need to be fixed
-        page = self.request.GET.get('page')
+        paginator = Paginator(comments, 4) # need to be fixed
+        page = self.request.GET.get('page', 1)
 
         try:
-            paginated_chapters = paginator.get_page(page)
-        except:
-            raise Http404()
+            paginated_comments = paginator.page(page)
+        except PageNotAnInteger:
+            paginated_comments = paginator.page(1)  # If page is not an integer, show the first page
+        except EmptyPage:
+            paginated_comments = paginator.page(paginator.num_pages)
 
-        context['paginated_chapters'] = paginated_chapters
+        context['paginated_comments'] = paginated_comments
 
         return context
 
