@@ -2,7 +2,7 @@ from django.urls import path, include
 from PharmaQ.consultation.views import CategoryCreateView, CategoryEditView, CategoryDeleteView, \
     CategoryListView, AnswerCreateView, AnswerListView, AnswerEditView, AnswerDeleteView, MyQuestionDetailView, \
     QuestionCreateView, QuestionEditView, QuestionDeleteView, MyQuestionsListView, UnansweredQuestionsListView, \
-    MyAnswerDetailView, publish_question, unpublish_question
+    MyAnswerDetailView, publish_question, unpublish_question, PublishedQuestionsListView
 
 urlpatterns = [
     path('categories/', include([
@@ -15,6 +15,7 @@ urlpatterns = [
     ])),
     path('questions/', include([
         path('create/', QuestionCreateView.as_view(), name='question-create'),
+        path('bublished-questions/', PublishedQuestionsListView.as_view(), name='question-list-published'),
         path('<int:question_pk>/', include([
             path('publish', publish_question, name='question-publish'),
             path('unpublish/', unpublish_question, name='question-unpublish'),

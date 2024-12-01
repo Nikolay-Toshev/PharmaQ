@@ -224,6 +224,28 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
             return redirect(self.request.META.get('HTTP_REFERER'))
 
+
+class PublishedQuestionsListView(LoginRequiredMixin, SearchMixin, ListView):
+    model = Question
+    context_object_name = 'all_questions'
+    template_name = 'consultations/question/published-questions-list.html'
+    paginate_by = 5
+
+    search_fields = ['title', 'content']
+
+    def get_queryset(self):
+        queryset = Question.objects.filter(is_published=True)
+        queryset = self.apply_search_filter(queryset)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('q', '')
+        context['selected_category'] = self.request.GET.get('category', '')
+
+        return context
+
 @login_required
 def publish_question(request, question_pk):
     if request.method == 'POST':
