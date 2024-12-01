@@ -2,7 +2,7 @@ from django.urls import path, include
 from PharmaQ.consultation.views import CategoryCreateView, CategoryEditView, CategoryDeleteView, \
     CategoryListView, AnswerCreateView, AnswerListView, AnswerEditView, AnswerDeleteView, MyQuestionDetailView, \
     QuestionCreateView, QuestionEditView, QuestionDeleteView, MyQuestionsListView, UnansweredQuestionsListView, \
-    MyAnswerDetailView
+    MyAnswerDetailView, publish_question, unpublish_question
 
 urlpatterns = [
     path('categories/', include([
@@ -15,7 +15,10 @@ urlpatterns = [
     ])),
     path('questions/', include([
         path('create/', QuestionCreateView.as_view(), name='question-create'),
-
+        path('<int:question_pk>/', include([
+            path('publish', publish_question, name='question-publish'),
+            path('unpublish/', unpublish_question, name='question-unpublish'),
+        ])),
         path('user/<int:user_pk>/question/<int:question_pk>/', include([
             path('edit/', QuestionEditView.as_view(), name='question-edit'),
             path('delete/', QuestionDeleteView.as_view(), name='question-delete'),

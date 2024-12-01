@@ -248,6 +248,10 @@ details:not([open]):hover {
     gap: 1rem;
 }
 
+.rating-forms button:hover {
+    color: #0d5385;
+}
+
 .approve-forms {
     display: flex;
     justify-content: right;

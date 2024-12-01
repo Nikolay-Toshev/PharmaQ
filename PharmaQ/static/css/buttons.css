@@ -122,6 +122,7 @@
 .details-btns {
     display: flex;
     justify-content: end;
+    align-items: center;
     gap: 0.5rem;
 }
 

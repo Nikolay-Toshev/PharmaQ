@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
@@ -222,3 +223,19 @@ class MyQuestionDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
                 rating.save()
 
             return redirect(self.request.META.get('HTTP_REFERER'))
+
+@login_required
+def publish_question(request, question_pk):
+    if request.method == 'POST':
+        question = get_object_or_404(Question, pk=question_pk)
+        question.is_published = True
+        question.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def unpublish_question(request, question_pk):
+    if request.method == 'POST':
+        question = get_object_or_404(Question, pk=question_pk)
+        question.is_published = False
+        question.save()
+        return redirect(request.META.get('HTTP_REFERER'))
