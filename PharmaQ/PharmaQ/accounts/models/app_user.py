@@ -4,6 +4,8 @@ from django.db import models
 
 class AppUser(AbstractUser):
 
+    email = models.EmailField(unique=True)
+
     personal_info = models.TextField(blank=True, null=True)
 
     profile_img = models.ImageField(upload_to="profile_imgs/", blank=True, null=True)
