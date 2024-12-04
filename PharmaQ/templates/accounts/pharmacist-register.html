@@ -5,16 +5,16 @@
     <div class="form-outer-container">
         <div class="form-container">
             <div class="form-card">
-                <h1 class="form-title">Sign Up</h1>
+                <h1 class="form-title">Регистрация</h1>
                 
                 <form method="post" enctype="multipart/form-data">                    
                     {% csrf_token %}
                     {{ form.as_div }} 
                     <div>
-                        <label for="professional-card">Professional card</label>
+                        <label for="professional-card">Професионална карта</label>
                         <input type="file" name="professional-card" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign Up</button>                    
+                    <button type="submit" class="btn btn-primary">Регистрирай се</button>                    
                 </form>
 
             </div>

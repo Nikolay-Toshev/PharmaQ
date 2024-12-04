@@ -1,19 +1,18 @@
 {% extends 'common/base.html' %}
 {% load static %}
 
-
 {% block content %}
 
     <div class="detail-outer-container">
         <div class="detail-container">
             <div class="detail-card">
-                <h1 class="detail-title">Details</h1>
+                <h1 class="detail-title">Детайли</h1>
                 <div class="profile-details">
                     <div class="container"> 
                     {% if user.is_pharmacist %}
                         <div class="rating">
-                            <p>rating <b>{{ rating }}</b></p>
-                            <p>answers <b>{{ answers }}</b></p>
+                            <p>Оценка <b>{{ rating }}</b></p>
+                            <p>Отговори <b>{{ answers }}</b></p>
                         </div>
                     {% endif %}
                         {% if user.profile_img %}
@@ -30,32 +29,32 @@
                         {% elif user.is_pharmacist %}
                             <a href="{% url 'pharmacist-edit' user.pk %}" class="profile-btn">Редактирай</a>
                         {% endif %}
-                        <a href="{% url 'password-change' user.pk %}" class="profile-btn">Смени Паролата</a>
+                        <a href="{% url 'password-change' user.pk %}" class="profile-btn">Смени паролата</a>
                         <a href="{% url 'user-delete' user.pk %}" class="profile-btn delete">Изтрий</a>
                     </div>  
                     <div class="profile">
             
                         {% if user.is_patient %}
                             <h5>Пациент</h5>
-                        {% elif user.is_pharmacist%}
+                        {% elif user.is_pharmacist %}
                             <h5>Фармацевт</h5>
                             
                         {% endif %}
                         <br>
             
                         <div class="profile-data">
-                            <span class="profile-title"><b>Username:</b></span>
+                            <span class="profile-title"><b>Потребителско име:</b></span>
                             <span class="profile-content">{{ user.username }}</span>
                         </div>
             
                         <div class="profile-data">
-                            <span class="profile-title"><b>Email:</b></span>
+                            <span class="profile-title"><b>Имейл:</b></span>
                             <span class="profile-content">{{ user.email }}</span>
                         </div>
             
             
                         <div class="profile-data">
-                            <span class="profile-title"><b>First Name:</b></span>
+                            <span class="profile-title"><b>Име:</b></span>
                             {% if user.first_name %}
                                 <span class="profile-content">{{ user.first_name }}</span>
                             {% else %}
@@ -64,7 +63,7 @@
                         </div> 
             
                         <div class="profile-data">
-                            <span class="profile-title"><b>Last Name:</b></span>
+                            <span class="profile-title"><b>Фамилия:</b></span>
                             {% if user.last_name %}
                                 <span class="profile-content">{{ user.last_name }}</span>
                             {% else %}
@@ -72,12 +71,11 @@
                             {% endif %}
                         </div>
             
-                        {% if user.is_pharmacist and user.personal_info%}
+                        {% if user.is_pharmacist and user.personal_info %}
                              <div class="profile-data">
-                                <span class="profile-title"><b>Personal Info:</b></span>
+                                <span class="profile-title"><b>Лична информация:</b></span>
                                     <span class="profile-content">{{ user.personal_info }}</span>
                             </div>
-
                         {% endif %}
                     
                     </div>

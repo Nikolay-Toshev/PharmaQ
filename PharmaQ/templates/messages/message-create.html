@@ -6,13 +6,13 @@
     <div class="form-outer-container">
         <div class="form-container">
             <div class="form-card">
-                <h1 class="form-title">Send message</h1>
-                <p>To: {{ receiver.username }}</p>
+                <h1 class="form-title">Изпрати съобщение</h1>
+                <p>До: {{ receiver.username }}</p>
                 <br>
                 <form method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Изпрати</button>
                 </form>
 
             </div>

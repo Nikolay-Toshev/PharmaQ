@@ -8,7 +8,7 @@
         <div class="detail-container">
             <div class="detail-card">
                 
-                <h1 class="detail-title">Details</h1>
+                <h1 class="detail-title">Детайли</h1>
                 <div class="primary-detail-card">
                     <div class="primary-container">
                         <a href="{% url 'user-details' pharmacist.pk %}"><h6>{{ pharmacist.username }}</h6></a>
@@ -25,7 +25,7 @@
                         
                         </div>
                         <div class="secondary-container">
-                            <h4 class="primary-title">My Answer</h4>
+                            <h4 class="primary-title">Моят отговор</h4>
 
                             <p class="question-detail-content">{{ answer.content }}</p>
                             <br>
@@ -52,7 +52,7 @@
                         {% endif %}
                         </div>
                         <div class="secondary-container">
-                            <h4 class="primary-title">Question</h4>
+                            <h4 class="primary-title">Въпрос</h4>
                             <h5 class="question-detail-title">{{ question.title }}</h5>
                             <h6 class="question-detail-category">{{ question.category_id }}</h6>
                             <p class="question-detail-content">{{ question.content }}</p>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="current">
                             {% if paginated_comments.has_previous or  paginated_comments.has_next %}
-                                <span>Page {{ paginated_comments.number }} of {{ paginated_comments.paginator.num_pages }}</span>
+                                <span>Страница {{ paginated_comments.number }} от {{ paginated_comments.paginator.num_pages }}</span>
                             {% endif %}
                         </div>
                         <div class="next">
@@ -107,7 +107,7 @@
                     </div>
                 {% else %}
                     <div class="comment-container">
-                        <p>No comments yet</p>
+                        <p>Все още няма коментари</p>
                     </div>
                 {% endif %}
                 <div class="comment-form-container">

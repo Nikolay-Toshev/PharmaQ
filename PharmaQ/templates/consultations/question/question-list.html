@@ -11,16 +11,16 @@
         <div class="list-container">
             <div class="list-card">
                 {% if request.user == user and request.user|check_user_group:'patient'%}
-                    <h1 class="list-title">My questions</h1>
+                    <h1 class="list-title">Моите въпроси</h1>
                 {% elif request.user|check_user_group:'pharmacist' %}
-                    <h1 class="list-title">Unanswered questions</h1>
+                    <h1 class="list-title">Неотговорени въпроси</h1>
                 {% endif %}
                 <div class="details">
                 <div class="search-form-container">
                     <form method="get" class="search-form">
-                        <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                        <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                         <select name="category">
-                            <option value="">All Categories</option>
+                            <option value="">Всички категории</option>
                             {% for category in categories %}
                                 <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>
                                     {{ category.title }}
@@ -34,19 +34,19 @@
                         <details>
                             <summary>
                                 <h6>{{ question.title }}</h6>
-                                <span>Category: {{ question.category_id.title }}</span>
+                                <span>Категория: {{ question.category_id.title }}</span>
                             </summary>
                             <p>{{ question.content }}</p>
                 
                             {% if request.user == question.creator_id %}
                                 <div class="details-btns">
-                                    <span><a href="{% url 'my-question-details' user.pk question.id %}">Details</a></span>
+                                    <span><a href="{% url 'my-question-details' user.pk question.id %}">Детайли</a></span>
                                 </div>
                                 {% has_answer question.pk as has_answer %}
                                 {% if has_answer %}
-                                    <h4>Answered!</h4>
+                                    <h4>Отговорено!</h4>
                                 {% else %}
-                                    <h4>Not answered!</h4>
+                                    <h4>Не е отговорено!</h4>
                                 {% endif %}    
                             {% endif %}
                             
@@ -69,7 +69,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

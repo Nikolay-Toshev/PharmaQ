@@ -14,10 +14,10 @@
 
             <div class="list-card">
             
-                <h1 class="list-title">Our Pharmacists</h1>
+                <h1 class="list-title">Нашите фармацевти</h1>
                     <div class="search-form-container">
                         <form method="get" class="search-form">
-                            <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                            <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                             <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
@@ -27,7 +27,7 @@
                              
                                 <div class="primary-container">
                                 <div class="rating">
-                                    <p>rating <b>{% calculate_rating %}</b></p>
+                                    <p>Рейтинг <b>{% calculate_rating %}</b></p>
                                 </div>
                                 {% if request.user == pharmacist %}
                                     <a href="{% url 'user-details' request.user.id %}"><h6>{{ pharmacist.username }}</h6></a>
@@ -55,14 +55,14 @@
                                     {% endif %}
                                 {% endif %}
                                  <div class="rating">
-                                    <p>answers <b>{% get_all_answers %}</b></p>
+                                    <p>Отговори <b>{% get_all_answers %}</b></p>
                                 </div>
                                 </div>
                                 <div class="secondary-container">
                                     {% if pharmacist.first_name and pharmacist.last_name %}
                                         <h6>{{ pharmacist.first_name }} {{ pharmacist.last_name }}</h6>
                                     {% else %}
-                                        <h6>Anonymous</h6>
+                                        <h6>Анонимен</h6>
                                     {% endif %}
                                     {% if pharmacist.personal_info %}
                                         <br>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

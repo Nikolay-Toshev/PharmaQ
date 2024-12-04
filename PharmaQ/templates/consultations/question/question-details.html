@@ -7,8 +7,8 @@
     <div class="detail-outer-container">
         <div class="detail-container">
             <div class="detail-card">
-                
-                <h1 class="detail-title">Details</h1>
+
+                <h1 class="detail-title">Детайли</h1>
                 <div class="primary-detail-card">
                     <div class="primary-container">
                         <a href="{% url 'user-details' patient.pk %}"><h6>{{ patient.username }}</h6></a>
@@ -22,10 +22,10 @@
                                 <a href="{% url 'user-details' patient.pk %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
                             </div>
                         {% endif %}
-                        
+
                         </div>
                         <div class="secondary-container">
-                            <h4 class="primary-title">My Question</h4>
+                            <h4 class="primary-title">Моят въпрос</h4>
                             <h5 class="question-detail-title">{{ question.title }}</h5>
                             <h6 class="question-detail-category">{{ question.category_id }}</h6>
                             <p class="question-detail-content">{{ question.content }}</p>
@@ -35,19 +35,19 @@
                                 {% if not question.is_published %}
                                     <form method="post" action="{% url 'question-publish' question.pk %}">
                                         {% csrf_token %}
-                                        <button>Публийувай</button>
+                                        <button>Публикувай</button>
                                     </form>
                                 {% else %}
                                     <form method="post" action="{% url 'question-unpublish' question.pk %}">
                                         {% csrf_token %}
-                                        <button>Отмани публикуването</button>
+                                        <button>Отмени публикуването</button>
                                     </form>
-                                {% endif %}    
+                                {% endif %}
                                 <span><a href="{% url 'question-edit' user.pk question.id %}"><i class="fa-duotone fa-solid fa-pen-to-square"></i></a></span>
                                 <span><a href="{% url 'question-delete' user.pk question.id %}"><i class="fa-solid fa-trash"></i></a></span>
                             </div>
                             {% endif %}
-                        </div>    
+                        </div>
                 </div>
                 {% if answer %}
                     <div class="secondary-detail-card">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="secondary-container">
 
-                                <h4 class="primary-title">Answer</h4>
+                                <h4 class="primary-title">Отговор</h4>
                                 <p class="answer-detail-content">{{ answer.content }}</p>
                                 <div class="rating-forms">
                                     <form method="post" action="">
@@ -130,7 +130,7 @@
                         </div>
                         <div class="current">
                             {% if paginated_comments.has_previous or  paginated_comments.has_next %}
-                                <span>Page {{ paginated_comments.number }} of {{ paginated_comments.paginator.num_pages }}</span>
+                                <span>Страница {{ paginated_comments.number }} от {{ paginated_comments.paginator.num_pages }}</span>
                             {% endif %}
                         </div>
                         <div class="next">
@@ -143,9 +143,9 @@
                     </div>
                     {% else %}
                         <div class="comment-container">
-                            <p>No comments yet</p>
+                            <p>Няма коментари още</p>
                         </div>
-                        
+
                     {% endif %}
                     <div class="comment-form-container">
                             <form method="post" class="comment-form">
@@ -153,9 +153,9 @@
                                 {{ comment_form }}
                                 <button type="submit" class="search-btn"><i class="fa-regular fa-comment"></i></button>
                             </form>
-                        </div>    
+                        </div>
                     </div>
                 {% endif %}
         </div>
-    </div>    
+    </div>
 {% endblock %}

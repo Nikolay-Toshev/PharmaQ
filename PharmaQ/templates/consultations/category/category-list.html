@@ -9,10 +9,10 @@
         <div class="list-container">
             <div class="list-card">
             
-                <h1 class="list-title">All categories</h1>
+                <h1 class="list-title">Всички категории</h1>
                 <div class="search-form-container">
                 <form method="get" class="search-form">
-                    <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                    <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                     <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

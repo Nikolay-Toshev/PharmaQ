@@ -13,10 +13,10 @@
 
             <div class="list-card">
             
-                <h1 class="list-title">All Patients</h1>
+                <h1 class="list-title">Всички пациенти</h1>
                     <div class="search-form-container">
                         <form method="get" class="search-form">
-                            <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                            <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                             <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
@@ -44,10 +44,10 @@
                                     {% if patient.first_name and patient.last_name %}
                                         <h6>{{ patient.first_name }} {{ patient.last_name }}</h6>
                                     {% else %}
-                                        <h6>Anonymous</h6>
+                                        <h6>Анонимен</h6>
                                     {% endif %}
                                     <br>
-                                    <p>Questions: {{ patient.questions.count }}</p>
+                                    <p>Въпроси: {{ patient.questions.count }}</p>
                                     <div class="details-btns">
                                         <a href="{% url 'message-create' patient.id %}" class="profile-btn">Изпрати съобщение</a>
                                     </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

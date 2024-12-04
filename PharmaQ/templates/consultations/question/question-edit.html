@@ -6,16 +6,16 @@
     <div class="form-outer-container">
         <div class="form-container">
             <div class="form-card">
-                
-                <h1 class="form-title">Edit</h1>
-                
+
+                <h1 class="form-title">Редактиране</h1>
+
                  <form method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Редактирай</button>
                 </form>
 
             </div>
         </div>
-    </div>    
+    </div>
 {% endblock %}

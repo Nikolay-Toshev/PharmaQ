@@ -6,7 +6,6 @@
 {% load calculate_rating %}
 {% load url_query_and_pagination %}
 
-
 {% block content %}
 
     <div class="list-outer-container">
@@ -14,10 +13,10 @@
 
             <div class="list-card">
             
-                <h1 class="list-title">All Pharmacists</h1>
+                <h1 class="list-title">Всички фармацевти</h1>
                     <div class="search-form-container">
                         <form method="get" class="search-form">
-                            <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                            <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                             <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
@@ -27,7 +26,7 @@
                              
                                 <div class="primary-container">
                                 <div class="rating">
-                                    <p>rating <b>{% calculate_rating %}</b></p>
+                                    <p>рейтинг <b>{% calculate_rating %}</b></p>
                                 </div>
                                
                                     <a href="{% url 'user-public-details' pharmacist.id %}"><h6>{{ pharmacist.username }}</h6></a>
@@ -42,14 +41,14 @@
                                         </div>
                                     {% endif %}
                                  <div class="rating">
-                                    <p>answers <b>{% get_all_answers %}</b></p>
+                                    <p>отговори <b>{% get_all_answers %}</b></p>
                                 </div>
                                 </div>
                                 <div class="secondary-container">
                                     {% if pharmacist.first_name and pharmacist.last_name %}
                                         <h6>{{ pharmacist.first_name }} {{ pharmacist.last_name }}</h6>
                                     {% else %}
-                                        <h6>Anonymous</h6>
+                                        <h6>Анонимен</h6>
                                     {% endif %}
                                     {% if pharmacist.personal_info %}
                                         <br>
@@ -57,10 +56,10 @@
                                     {% endif %}
                                     {% if pharmacist.is_active %}
                                         <br>
-                                        <p>Approved</p>
+                                        <p>Одобрен</p>
                                     {% else %}
                                         <br>
-                                        <p>Unapproved</p>
+                                        <p>Неодобрен</p>
                                     {% endif %}
                                     <div class="details-btns">
                                         <a href="{% url 'message-create' pharmacist.id %}" class="profile-btn">Изпрати съобщение</a>
@@ -79,7 +78,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

@@ -8,10 +8,10 @@
         <div class="list-container">
             <div class="list-card">
                 
-                <h1 class="list-title">My Answers</h1>
+                <h1 class="list-title">Моите отговори</h1>
                 <div class="search-form-container">
                 <form method="get" class="search-form">
-                    <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                    <input type="text" name="q" placeholder="Търсене..." value="{{ search_query }}">
                     <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 </div>
@@ -19,7 +19,7 @@
                     <details>
                         <summary>
                             <h6>{{ answer.question_id.title }}</h6>
-                            <span>Category: {{ answer.question_id.category_id }}</span>
+                            <span>Категория: {{ answer.question_id.category_id }}</span>
                         </summary>
                         <div class="profile-details">
                 
@@ -29,7 +29,7 @@
                 
                         {% if request.user == answer.creator_id %}
                             <div class="details-btns">
-                                <span><a href="{% url 'my-answer-details' user.pk answer.pk %}">Details</a></span>
+                                <span><a href="{% url 'my-answer-details' user.pk answer.pk %}">Детайли</a></span>
                             </div>
 
                         {% endif %}
@@ -46,7 +46,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

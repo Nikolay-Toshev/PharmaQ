@@ -8,17 +8,17 @@
         <div class="detail-container">
             <div class="detail-card">
                 
-                <h1 class="detail-title">New Pharmacists</h1>
+                <h1 class="detail-title">Нови фармацевти</h1>
                 
                 <div class="search-form-container">
                     <form method="get" class="search-form">
-                        <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                        <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
                 
                 {% if not all_pharmacists %}
-                    <h6 class="pharm-approve">There is no Pharmacists to approve!</h6>
+                    <h6 class="pharm-approve">Няма фармацевти за одобрение!</h6>
                 {% endif %}
                 
                 {% for pharmacist in all_pharmacists %}
@@ -39,7 +39,7 @@
                             <div class="approve-forms">
                                 <form method="post" action="{% url 'pharmacist-approve' pk=pharmacist.id %}">
                                     {% csrf_token %}
-                                    <button class="approve-btn">Approve</button>
+                                    <button class="approve-btn">Одобри</button>
                                 </form>    
                             </div>    
                         </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

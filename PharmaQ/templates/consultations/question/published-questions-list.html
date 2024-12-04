@@ -14,12 +14,12 @@
 
             <div class="list-card">
             
-                <h1 class="list-title">Published questions</h1>
+                <h1 class="list-title">Публикувани въпроси</h1>
                 <div class="search-form-container">
                     <form method="get" class="search-form">
-                        <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                        <input type="text" name="q" placeholder="Търсене... "{{ search_query }}>
                         <select name="category">
-                            <option value="">All Categories</option>
+                            <option value="">Всички категории</option>
                             {% for category in categories %}
                                 <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>
                                     {{ category.title }}
@@ -35,9 +35,9 @@
                             
                         </div>
                         <div class="secondary-container">
-                            <h4 class="primary-title">Question</h4>
-                            <h5 class="question-detail-title">Title: {{ question.title }}</h5>
-                            <h6 class="question-detail-category">Category: {{ question.category_id }}</h6>
+                            <h4 class="primary-title">Въпрос</h4>
+                            <h5 class="question-detail-title">Заглавие: {{ question.title }}</h5>
+                            <h6 class="question-detail-category">Категория: {{ question.category_id }}</h6>
                             <p class="question-detail-content">{{ question.content }}</p>
                              {% if question.answers %}
                                 <div class="primary-container">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="secondary-container">
     
-                                    <h4 class="primary-title">Answer</h4>
+                                    <h4 class="primary-title">Отговор</h4>
                                     <p class="answer-detail-content">{{ question.answers.first.content }}</p>
                                     
                                 </div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

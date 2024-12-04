@@ -7,7 +7,7 @@
         <div class="form-container">
             <div class="form-card">
                 
-                <h1 class="form-title">Edit</h1>
+                <h1 class="form-title">Редактиране</h1>
                 <div class="answer-details">
                     <h6>{{ question.title }}</h6>
                     <p>{{ question.content }}</p>
@@ -16,7 +16,7 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Редактирай</button>
                 </form>                
 
             </div>

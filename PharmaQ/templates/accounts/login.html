@@ -5,24 +5,24 @@
     <div class="form-outer-container">
         <div class="form-container">
             <div class="form-card">
-                <h1 class="form-title">Login</h1>
+                <h1 class="form-title">Вход</h1>
                 
                 <form method="post">                    
                     {% csrf_token %}
                     {{ form.as_div }}
                     <div>
-                        <a href="{% url 'reset_password' %}">Forgot password?</a>
+                        <a href="{% url 'reset_password' %}">Забравена парола?</a>
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>                    
+                    <button type="submit" class="btn btn-primary">Вход</button>                    
                 </form>
                 
                 
                 <div class="form-footer">
                     
-                    <p>Don't have an account?</p>
+                    <p>Нямаш акаунт?</p>
                     <p>
-                        <a href="{% url 'patient-registration' %}">Sign Up as Patient</a> or
-                        <a href="{% url 'pharmacist-registration' %}">Sign Up as Pharmacist</a>
+                        <a href="{% url 'patient-registration' %}">Регистрирай се като пациент</a> или
+                        <a href="{% url 'pharmacist-registration' %}">Регистрирай се като фармацевт</a>
                     </p>
                 </div>
             </div>

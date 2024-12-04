@@ -1,6 +1,5 @@
 {% load static %}
 {% load check_user_group %}
-{% load check_user_group %}
 {% load unread_messages %}
 
 <nav class="navbar">
@@ -10,44 +9,44 @@
             PharmaQ</a>
         <ul class="nav-links">
             {% if request.user.is_authenticated %}
-                <li><a href="{% url 'question-list-published' %}">Published questions</a></li>
+                <li><a href="{% url 'question-list-published' %}">Публикувани въпроси</a></li>
                 {% if request.user|check_user_group:"patient" or request.user|check_user_group:"pharmacist" %}
-                    <li><a href="{% url 'pharmacist-list-all' %}">Our pharmacists</a></li>
-                {% endif %}    
+                    <li><a href="{% url 'pharmacist-list-all' %}">Нашите фармацевти</a></li>
+                {% endif %}
                 {% if request.user|check_user_group:'site-moderator' %}
-                    <li><a href="{% url 'pharmacists-moderation' request.user.pk %}">All Pharmacists</a></li>
-                    <li><a href="{% url 'patients-moderation' request.user.pk %}">All Patients</a></li>
-                    <li><a href="{% url 'approve' request.user.pk %}">Approve Pharmacist</a></li>
-                {% endif %}    
+                    <li><a href="{% url 'pharmacists-moderation' request.user.pk %}">Всички фармацевти</a></li>
+                    <li><a href="{% url 'patients-moderation' request.user.pk %}">Всички пациенти</a></li>
+                    <li><a href="{% url 'approve' request.user.pk %}">Одобряване на фармацевт</a></li>
+                {% endif %}
                 <li>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn-logout" >Logout</button>
+                        <button type="submit" class="btn-logout" >Изход</button>
                     </form>
                 </li>
                 <li class="menu-item dropdown">
-                    <a href="#">Profile</a>
+                    <a href="#">Профил</a>
                     <ul class="dropdown-menu">
-                         <li><a href="{% url 'user-details' request.user.pk %}">Profile details</a></li>
-                         <li><a href="{% url 'sent-message-list' request.user.pk %}">Sent messages</a></li>
-                         <li><a href="{% url 'received-message-list' request.user.pk %}">Received messages</a></li>
+                         <li><a href="{% url 'user-details' request.user.pk %}">Детайли на профила</a></li>
+                         <li><a href="{% url 'sent-message-list' request.user.pk %}">Изпратени съобщения</a></li>
+                         <li><a href="{% url 'received-message-list' request.user.pk %}">Получени съобщения</a></li>
                         {% if request.user|check_user_group:"patient" %}
-                            <li><a href="{% url 'my-question-list' request.user.pk %}">My questions</a></li>
-                            <li><a href="{% url 'question-create' %}">Ask question</a></li>
+                            <li><a href="{% url 'my-question-list' request.user.pk %}">Моите въпроси</a></li>
+                            <li><a href="{% url 'question-create' %}">Задай въпрос</a></li>
                         {% elif request.user|check_user_group:"pharmacist" %}
-                            <li><a href="{% url 'answer-list' request.user.pk %}">My answers</a></li>
-                            <li><a href="{% url 'unanswered-question-list' request.user.pk %}">Answer question</a></li>
+                            <li><a href="{% url 'answer-list' request.user.pk %}">Моите отговори</a></li>
+                            <li><a href="{% url 'unanswered-question-list' request.user.pk %}">Отговори на въпрос</a></li>
                         {% elif request.user|check_user_group:"site-moderator" %}
-                            <li><a href="{% url 'category-create' %}">Create category</a></li>
-                        {% endif %}  
-                        <li><a href="{% url 'category-list' %}">All categories</a></li>
+                            <li><a href="{% url 'category-create' %}">Създай категория</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'category-list' %}">Всички категории</a></li>
                     </ul>
                 </li>
                 {% if request.user|unread_messages %}
                     <li><a href="{% url 'received-message-list' request.user.pk %}" class="notification">New</a></li>
-                {% endif %}    
+                {% endif %}
             {% else %}
-                <li><a href="{% url 'login' %}">Login/Register</a></li>
+                <li><a href="{% url 'login' %}">Вход/Регистрация</a></li>
             {% endif %}
         </ul>
     </div>

@@ -4,17 +4,16 @@
 {% load check_user_group %}
 {% load question_tags %}
 
-
 {% block content %}
 
     <div class="list-outer-container">
         <div class="list-container">
 
             <div class="list-card">
-                <h1 class="list-title">My sent messages</h1>
+                <h1 class="list-title">Моите изпратени съобщения</h1>
                 <div class="search-form-container">
                     <form method="get" class="search-form">
-                        <input type="text" name="q" placeholder="Search... "{{ search_query }}>
+                        <input type="text" name="q" placeholder="Търсене..." "{{ search_query }}">
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
@@ -45,7 +44,7 @@
                                         <p>{{ message.created_at }}</p>
                                     </div>
                                     <div class="details-btns">
-                                        <a href="{% url 'message-detail' request.user.pk message.pk %}">Details</a>
+                                        <a href="{% url 'message-detail' request.user.pk message.pk %}">Детайли</a>
                                     </div>
                                 </div>
                                 
@@ -53,7 +52,7 @@
                         </div>
                     {% endfor %}
                     {% if not all_messages %}
-                        <h6>No messages</h6>
+                        <h6>Няма съобщения</h6>
                     {% endif %}
                 </div>
                 <div class="pagination">
@@ -66,7 +65,7 @@
                     </div>
                     <div class="current">
                         {% if page_obj.has_previous or  page_obj.has_next %}
-                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            <span>Страница {{ page_obj.number }} от {{ page_obj.paginator.num_pages }}</span>
                         {% endif %}
                     </div>
                     <div class="next">

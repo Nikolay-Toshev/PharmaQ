@@ -6,12 +6,12 @@
     <div class="detail-outer-container">
         <div class="detail-container">
             <div class="detail-card">
-                <h1 class="detail-title">Details</h1>
+                <h1 class="detail-title">Детайли</h1>
                 <div class="primary-detail-card">
                     <div class="primary-container">
                     
                         {% if request.user == message.receiver %}
-                            <h6>From:</h6>
+                            <h6>От:</h6>
                             <a href="{% url 'user-public-details' message.sender.id %}"><h6>{{ message.sender.username }}</h6></a>
                             <br>
                             {% if message.sender.profile_img %}
@@ -24,7 +24,7 @@
                                 </div>
                             {% endif %}
                         {% else %}
-                            <h6>From:</h6>
+                            <h6>От:</h6>
                             <a href="{% url 'user-details' message.sender.id %}"><h6>{{ message.sender.username }}</h6></a>
                             <br>
                             {% if message.sender.profile_img %}
@@ -48,15 +48,15 @@
                         </div>
                         <div class="details-btns">
                              {% if request.user == message.receiver %}
-                                <a href="{% url 'message-create' message.sender.id %}">Answer</a>
+                                <a href="{% url 'message-create' message.sender.id %}">Отговори</a>
                             {% endif %}
-                                <a href="{% url 'message-delete' request.user.pk message.pk %}">Delete</a>
+                                <a href="{% url 'message-delete' request.user.pk message.pk %}">Изтрий</a>
                         </div>
                     </div>   
                     <div class="primary-container">
                        
                         {% if request.user == message.receiver %}  
-                             <h6>To:</h6>
+                             <h6>До:</h6>
                             <a href="{% url 'user-details' message.receiver.id %}"><h6>{{ message.receiver.username }}</h6></a>
                             <br>
                             {% if message.receiver.profile_img %}
@@ -69,7 +69,7 @@
                                 </div>
                             {% endif %}
                         {% else %}
-                            <h6>To:</h6>
+                            <h6>До:</h6>
                             <a href="{% url 'user-public-details' message.receiver.id %}"><h6>{{ message.receiver.username }}</h6></a>
                             <br>
                             {% if message.receiver.profile_img %}
