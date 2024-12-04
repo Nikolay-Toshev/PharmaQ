@@ -11,7 +11,7 @@ class MessageBaseForm(forms.ModelForm):
             'content': forms.Textarea(attrs={
                 'rows': 5,
                 'class': 'form-textarea',
-                'placeholder': 'Enter your message',
+                'placeholder': 'Въведете съобщението си',
             }),
         }
         labels = {

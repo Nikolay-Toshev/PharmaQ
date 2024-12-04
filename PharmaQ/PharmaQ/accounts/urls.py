@@ -1,18 +1,17 @@
-from django.contrib.auth.views import LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
-    PasswordResetCompleteView
+from django.contrib.auth.views import LogoutView, PasswordResetDoneView, PasswordResetCompleteView
 from django.urls import path, include
 
 from PharmaQ.accounts.views import AppUserLoginView, PatientRegistrationView, PatientEditView, UserDetailView, \
     AppUserDeleteView, AppUserChangePasswordView, PharmacistRegistrationView, PharmacistEditView, AllPharmacistListView, \
     PublicUserDetailView, UnapprovedPharmacistListView, approve_pharmacist, AllPharmacistsModerationListView, \
-    AllPatientsModerationListView
+    AllPatientsModerationListView, AppUserPasswordResetView, AppUserPasswordResetConfirmView
 
 urlpatterns = [
     path('login/', AppUserLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('reset_password/', PasswordResetView.as_view(template_name='accounts/password-reset.html'), name='reset_password'),
+    path('reset_password/', AppUserPasswordResetView.as_view(), name='reset_password'),
     path('reset_password_sent/', PasswordResetDoneView.as_view(template_name='accounts/reset-password-done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>', PasswordResetConfirmView.as_view(template_name='accounts/password-reset-confirm.html'), name='password_reset_confirm'),
+    path('reset/<uidb64>/<token>', AppUserPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset_password_complete/', PasswordResetCompleteView.as_view(template_name='accounts/password-reset-complete.html'), name='password_reset_complete'),
     path('<int:pk>/', include([
         path('approve/', UnapprovedPharmacistListView.as_view(), name='approve'),

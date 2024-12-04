@@ -10,7 +10,7 @@ class CommentBaseForm(forms.ModelForm):
         widgets = {
             'content': forms.TextInput(attrs={
                 'class': 'comment-form',
-                'placeholder': 'Enter your comment...',
+                'placeholder': 'Добави коментар...',
             }),
         }
         labels = {

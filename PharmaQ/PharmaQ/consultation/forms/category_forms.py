@@ -9,6 +9,10 @@ class CategoryBaseForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
+        labels = {
+            'description': 'Описание',
+            'title': 'Заглавие',
+        }
 
 
 class CategoryCreateForm(CategoryBaseForm):

@@ -8,7 +8,10 @@ class AnswerBaseForm(forms.ModelForm):
         model = Answer
         fields = ['content']
         widgets = {
-            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Отговор...'}),
+        }
+        labels = {
+            'content': 'Съдържание',
         }
 
 

@@ -12,3 +12,12 @@ class PharmacistEditForm(forms.ModelForm):
                 'class': 'add-image-btn',
             }),
         }
+
+        labels = {
+            'username': 'Потребителско име',
+            'email': 'Имейл',
+            'first_name': 'Име',
+            'last_name': 'Фамилия',
+            'profile_img': 'Профилна снимка',
+            'personal_info': "Лична информация",
+        }

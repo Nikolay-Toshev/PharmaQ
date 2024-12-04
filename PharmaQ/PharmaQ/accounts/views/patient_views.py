@@ -33,6 +33,16 @@ class PatientRegistrationView(CreateView):
 
         return response
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+
+        form.fields['username'].label = 'Потребителско име'
+        form.fields['email'].label = 'Имейл'
+        form.fields['password1'].label = 'Парола'
+        form.fields['password2'].label = 'Потвърди паролата'
+
+        return form
+
 
 class PatientEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserModel

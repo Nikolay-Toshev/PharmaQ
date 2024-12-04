@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView
@@ -19,6 +19,14 @@ class AppUserLoginView(LoginView, UserPassesTestMixin):
     def handle_no_permission(self):
         return redirect('index')
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+
+        form.fields['username'].label = 'Потребителско име'
+        form.fields['password'].label = 'Парола'
+
+        return form
+
 
 class AppUserChangePasswordView(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView):
     template_name = 'accounts/change-password.html'
@@ -30,6 +38,34 @@ class AppUserChangePasswordView(LoginRequiredMixin, UserPassesTestMixin, Passwor
     def get_success_url(self):
         return reverse_lazy('user-details', kwargs={'pk':self.request.user.pk})
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+
+        form.fields['old_password'].label = 'Текуща парола'
+        form.fields['new_password1'].label = 'Нова парола'
+        form.fields['new_password2'].label = 'Потвърдете новата парола'
+
+        return form
+
+
+class AppUserPasswordResetView(PasswordResetView):
+    template_name = 'accounts/password-reset.html'
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['email'].label = 'Имейл'
+
+        return form
+
+
+class AppUserPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'accounts/password-reset-confirm.html'
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['new_password1'].label = 'Нова парола'
+        form.fields['new_password2'].label = 'Потвърдете новата парола'
+        return form
 
 class AppUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = UserModel

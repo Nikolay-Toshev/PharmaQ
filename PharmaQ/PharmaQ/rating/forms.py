@@ -28,7 +28,6 @@ class DislikeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Add a hidden form_type field
         self.fields['form_type'] = forms.CharField(
             widget=forms.HiddenInput(),
             initial='dislike_form'
