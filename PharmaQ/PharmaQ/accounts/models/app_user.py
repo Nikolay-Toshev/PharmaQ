@@ -20,3 +20,6 @@ class AppUser(AbstractUser):
             if old_profile_img and old_profile_img != self.profile_img:
                 old_profile_img.delete(save=False)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.username

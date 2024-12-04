@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-
 from PharmaQ.consultation.managers import AnswerManager
 from PharmaQ.consultation.models.question import Question
 
