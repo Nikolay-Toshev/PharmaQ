@@ -1,4 +1,5 @@
 from django.db import models
+from unidecode import unidecode
 from django.template.defaultfilters import slugify
 
 
@@ -14,8 +15,9 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
+
         # if self.slug is None or self.slug == '': # if not commented the slug will not change when edit the category title
-        self.slug = slugify(f'{self.title}-{self.id}')
+        self.slug = slugify(f'{unidecode(self.title)}-{self.id}')
         return super().save(*args, **kwargs)
 
     def __str__(self):

@@ -32,12 +32,12 @@
                             <br>
                             {% if request.user == question.creator_id %}
                             <div class="details-btns">
-                                {% if not question.is_published %}
+                                {% if not question.is_published and answer %}
                                     <form method="post" action="{% url 'question-publish' question.pk %}">
                                         {% csrf_token %}
                                         <button>Публикувай</button>
                                     </form>
-                                {% else %}
+                                {%  elif question.is_published and answer %}
                                     <form method="post" action="{% url 'question-unpublish' question.pk %}">
                                         {% csrf_token %}
                                         <button>Отмени публикуването</button>

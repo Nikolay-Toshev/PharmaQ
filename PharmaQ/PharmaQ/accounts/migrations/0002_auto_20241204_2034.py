@@ -8,7 +8,6 @@ def generate_groups(apps, schema_editor):
     Group.objects.get_or_create(name="patient")
     Group.objects.get_or_create(name="pharmacist")
     Group.objects.get_or_create(name="site-moderator")
-    Group.objects.get_or_create(name="site-admin")
 
 class Migration(migrations.Migration):
 
