@@ -39,7 +39,7 @@ class CategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user.groups.filter(name__exact='site-moderator').exists()
 
 
-class CategoryListView(LoginRequiredMixin, SearchMixin, ListView):
+class CategoryListView(SearchMixin, ListView):
     model = Category
     template_name = 'consultations/category/category-list.html'
     context_object_name = 'categories'

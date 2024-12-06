@@ -8,6 +8,8 @@
             <img src="{% static 'img/0b60191ffe56a7f235f5a1c481acbfaa.png' %}" alt="" class="logo-pic">
             PharmaQ</a>
         <ul class="nav-links">
+            <li><a href="{% url 'how-to-use' %}">За платформата</a></li>
+            <li><a href="{% url 'category-list' %}">Категории</a></li>
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'question-list-published' %}">Публикувани въпроси</a></li>
                 {% if request.user|check_user_group:"patient" or request.user|check_user_group:"pharmacist" %}
@@ -18,12 +20,6 @@
                     <li><a href="{% url 'patients-moderation' request.user.pk %}">Всички пациенти</a></li>
                     <li><a href="{% url 'approve' request.user.pk %}">Одобряване на фармацевт</a></li>
                 {% endif %}
-                <li>
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn-logout" >Изход</button>
-                    </form>
-                </li>
                 <li class="menu-item dropdown">
                     <a href="#">Профил</a>
                     <ul class="dropdown-menu">
@@ -39,8 +35,13 @@
                         {% elif request.user|check_user_group:"site-moderator" %}
                             <li><a href="{% url 'category-create' %}">Създай категория</a></li>
                         {% endif %}
-                        <li><a href="{% url 'category-list' %}">Всички категории</a></li>
                     </ul>
+                </li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout" >Изход</button>
+                    </form>
                 </li>
                 {% if request.user|unread_messages %}
                     <li><a href="{% url 'received-message-list' request.user.pk %}" class="notification">New</a></li>

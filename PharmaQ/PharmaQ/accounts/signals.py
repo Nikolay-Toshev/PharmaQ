@@ -9,19 +9,20 @@ UserModel = get_user_model()
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         if instance.is_patient:
-            subject = 'Welcome to PharmaQ!'
-            message = f'Hello {instance.username}. Wellcome to PharmaQ!'
+            subject = 'Добре дошли във PharmaQ!'
+            message = (f'Здравейте, {instance.username}, Благодарим Ви, че се регистрирахте в във PharmaQ! Радваме се, че сте с нас.'
+                       f' Ако имате въпроси или се нуждаете от помощ, не се колебайте да се свържете с нас на support@pharma-q.org')
             recipient_list = [instance.email]
             send_mail(subject, message, None, recipient_list)
         if instance.is_pharmacist:
-            subject = 'Verifying Pharmacist'
-            message = f'Hello {instance.username}! Your pharmacist credentials are \
-            being verified. You will receive an email when you are verified.'
+            subject = 'Потвърждение за проверка на Вашата регистрация'
+            message = (f'Здравейте, {instance.username}! Вашата регистрация като фармацевт е в процес на проверка. '
+                       f'Ще Ви изпратим имейл, когато тя бъде успешно потвърдена.')
             recipient_list = [instance.email]
             send_mail(subject, message, None, recipient_list)
             moderators = UserModel.objects.filter(groups__name='site-moderator').all()
             for moderator in moderators:
-                send_mail('New Pharmacist', 'There is new pharmacist for approval', None, [moderator.email])
+                send_mail('Нов фармацевт', 'Нов фармацевт очаква одобрение', None, [moderator.email])
 
 @receiver(pre_save, sender=UserModel)
 def approve_pharmacist(sender, instance, **kwargs):
@@ -34,7 +35,8 @@ def approve_pharmacist(sender, instance, **kwargs):
         if previous_instance:
             if previous_instance.is_active != instance.is_active:
                 if not previous_instance.is_active and instance.is_active:
-                    subject = 'Welcome to PharmaQ!'
-                    message = f'Hello {instance.username}. Wellcome to PharmaQ!'
+                    subject = 'Добре дошли във PharmaQ!'
+                    message = (f'Здравейте, {instance.username}, Благодарим Ви, че се регистрирахте в във PharmaQ! Радваме се, че сте с нас.'
+                       f' Ако имате въпроси или се нуждаете от помощ, не се колебайте да се свържете с нас на support@pharma-q.org')
                     recipient_list = [instance.email]
                     send_mail(subject, message, None, recipient_list)

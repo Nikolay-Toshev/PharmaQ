@@ -308,3 +308,7 @@
     justify-content: center;
     gap: 1rem;
 }
+
+.fa-ul li {
+    list-style-type: disc;
+}
