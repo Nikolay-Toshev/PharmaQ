@@ -1,5 +1,9 @@
 version: '3.9'
 
+networks:
+  django-network:
+    driver: bridge
+
 services:
   django:
     build:
