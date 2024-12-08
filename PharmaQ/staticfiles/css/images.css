@@ -1,0 +1,69 @@
+.profile-img {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+.primary-img {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+}
+
+.secondary-img {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+}
+
+.primary-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.secondary-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header-img a img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-img {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+
+.comment-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.professional_card {
+    width: 200px;
+    height: 100px;
+    margin: auto;
+}
+
+.professional_card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

@@ -1,0 +1,264 @@
+form a {
+    display: block;
+    text-align: right;
+}
+
+form .errorlist li {
+    list-style: none;
+    color: red;
+    font-size: 0.8rem;
+}
+
+form .helptext {
+    display: none;
+}
+
+form textarea {
+    width: 100%;
+    resize: none;
+}
+
+form select {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+form .answer-details h3 {
+    text-align: center;
+}
+
+.delete-form h5{
+    text-align: center;
+    padding-bottom: 2rem;
+    color: #d50909;
+}
+
+.form-outer-container {
+    margin: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+}
+
+.form-container a {
+    font-size: 0.8rem;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+.form-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-card div {
+    margin-bottom: 15px;
+}
+
+.form-card div label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-card div input, .form-card div textarea, .form-card div select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-card div input[type="file"] {
+    padding: 3px;
+}
+
+.form-card div input:focus, .form-card div textarea:focus, .form-card div select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.form-footer {
+    display: block;
+    text-align: center;
+}
+/*details*/
+
+.profile-details {
+    display: flex;
+    gap: 3rem;
+}
+
+.profile {
+    width: 100%;
+}
+
+.profile-title {
+    padding-right: 1rem;
+    width: 130px;
+}
+
+.profile-data {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.profile a {
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    margin: 1rem 0;
+    transition: background-color 0.3s;
+}
+
+.profile a:hover {
+    text-decoration: none;
+    background-color: #0d5385;
+}
+
+.profile h5 {
+    /*text-align: center;*/
+}
+
+.profile-details .container a {
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    margin: 1rem 0;
+    transition: background-color 0.3s;
+}
+
+.profile-details .container a:hover {
+    text-decoration: none;
+    background-color: #0d5385;
+}
+
+.details-btns {
+    text-align: right;
+}
+
+.details-btns span {
+    padding: 0.5rem;
+}
+
+details {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-block: 0.5rem;
+    text-decoration: none;
+}
+
+summary {
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 550;
+}
+
+details p {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+details:not([open]):hover {
+    background-color: #007bff;
+}
+
+.search-form{
+    position: relative;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    width: 60%;
+}
+
+.search-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.search-form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.comment-form{
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.comment-form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.form-textarea {
+    padding: 1rem;
+}
+
+.rating-forms {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+}
+
+.rating-forms button:hover {
+    color: #0d5385;
+}
+
+.approve-forms {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+}
+
+.login a:hover {
+    text-decoration: none;
+}

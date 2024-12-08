@@ -1,0 +1,83 @@
+.menu-item {
+    position: relative;
+}
+
+.menu-item.dropdown:hover .dropdown-menu{
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #007bff;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    min-width: 13rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+.navbar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.navbar .logo {
+    color: #fff;
+    font-size: 2rem;
+    font-family: "Marck Script", cursive;
+    font-weight: 550;
+}
+
+.navbar .logo-pic {
+    width: 50px;
+    height: auto;
+    vertical-align: middle;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .nav-links li {
+    display: inline;
+}
+
+.navbar .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: block;
+    transition: background-color 0.3s;
+
+}
+
+.navbar .nav-links a:hover {
+    background-color: #0d5385;
+}
+
+.notification {
+    background-color: #ff0000;
+}
+
+.notification:hover {
+    background-color: #850d0d;
+}

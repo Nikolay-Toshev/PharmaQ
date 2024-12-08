@@ -1,0 +1,148 @@
+.btn-logout {
+    all: unset;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.btn-logout:hover {
+    background-color: #0d5385;
+}
+
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0d5385;
+    text-decoration: none;
+}
+
+.search-btn {
+    all: unset;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.search-btn:hover {
+    background-color: #0d5385;
+}
+
+.add-image-btn::-webkit-file-upload-button {
+    all: unset;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.add-image-btn::-webkit-file-upload-button:hover {
+    background-color: #0d5385;
+}
+
+.add-image-btn {
+    padding: 0;
+}
+
+.like-btn {
+    all: unset;
+    color: #007bff;
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.approve-btn {
+    all: unset;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.approve-btn:hover {
+    background-color: #0d5385;
+}
+
+.paginator-btn {
+    all: unset;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.paginator-btn:hover {
+    background-color: #0d5385;
+}
+
+.details-btns {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.details-btns span{
+    padding: 0;
+}
+
+.details-btns a, .details-btns button {
+    all: unset;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-color: #007bff;
+    background-color: #007bff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.details-btns a:hover, .details-btns button:hover {
+    background-color: #0d5385;
+    text-decoration: none;
+}

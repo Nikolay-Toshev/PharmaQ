@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-inline: auto;
+    background-color: #dcdcdc;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #f4f4f9;
+
+}
+
+main::before {
+    content: "";
+    display: block;
+    height: 7rem;
+}

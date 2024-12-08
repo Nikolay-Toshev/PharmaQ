@@ -1,0 +1,314 @@
+/*index.html*/
+.index {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-section {
+    background-color: #e9ecef;
+    padding: 50px 15px;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero-section .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.hero-section .btn:hover {
+    background-color: #0056b3;
+}
+
+.features-section {
+    padding: 50px 15px;
+}
+
+.features-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.features {
+    display: flex;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+.feature {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+}
+
+.feature h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* list-containers */
+.list-outer-container {
+    margin: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+.list-container a {
+    font-size: 0.8rem;
+}
+
+.list-container a:hover {
+    text-decoration: underline;
+}
+
+.list-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.list-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.list-card div {
+    margin-bottom: 15px;
+}
+
+.list-card div label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.list-card div input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.list-card div input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.list-footer {
+    display: block;
+    text-align: center;
+}
+
+/* detail-containers */
+.detail-outer-container {
+    margin: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+.detail-container a {
+    font-size: 0.8rem;
+}
+
+.detail-container a:hover {
+    text-decoration: underline;
+}
+
+.detail-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.detail-title {
+    font-size: 1.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.question-detail-title {
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.question-detail-category {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.question-detail-content {
+    font-weight: 500;
+}
+
+.secondary-detail-card {
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 3rem;
+}
+
+.primary-detail-card {
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 3rem;
+}
+
+.primary-container a {
+    color: #000;
+    text-align: center;
+}
+
+.primary-container a:hover {
+    text-decoration: none;
+}
+
+.primary-title {
+    text-align: center;
+}
+
+.secondary-container{
+    flex-grow: 1;
+}
+
+
+.answer-detail-content {
+    font-weight: 500;
+}
+
+.detail-card div {
+    margin-bottom: 15px;
+}
+
+.detail-card div label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.detail-card div input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.detail-card div input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.detail-footer {
+    display: block;
+    text-align: center;
+}
+
+.comment-container {
+    padding-block: 1rem;
+    padding-right: 2rem;
+    border-bottom: 3px solid #dcdcdd;
+    display: flex;
+    gap: 3rem;
+}
+
+.comment-container p {
+    flex-grow: 1;
+    vertical-align: center;
+}
+
+.message-container {
+    margin-top: 2rem;
+}
+
+.message-container .message {
+    text-align: start;
+}
+
+.rating {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.pharm-approve {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.fa-ul li {
+    list-style-type: disc;
+}
