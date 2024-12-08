@@ -16,9 +16,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-RUN python manage.py migrate
-
 ENV DJANGO_SETTINGS_MODULE=PharmaQ.settings_exam
+
+RUN python manage.py migrate
 
 EXPOSE 8000
 
