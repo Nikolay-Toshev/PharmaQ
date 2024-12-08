@@ -16,7 +16,7 @@
                     <li><a href="{% url 'pharmacist-list-all' %}">Нашите фармацевти</a></li>
                 {% endif %}
                 {% if request.user|check_user_group:'site-moderator' %}
-                    
+
                 {% endif %}
                 <li class="menu-item dropdown">
                     <a href="#">Профил</a>

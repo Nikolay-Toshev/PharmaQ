@@ -21,6 +21,9 @@
                         </form>
                     </div>
                     <div class="details">
+                        {% if not all_patients %}
+                            <h6>Няма регистрирани пациенти</h6>
+                        {% endif %}
                         {% for patient in all_patients %}
                             <div class="primary-detail-card">
                              

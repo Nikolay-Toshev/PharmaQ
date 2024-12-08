@@ -29,6 +29,9 @@
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
+                {% if not all_questions %}
+                    <h6>Няма публикувани въпроси</h6>
+                {% endif %}
                 {% for question in all_questions %}
                     <div class="primary-detail-card">
                         <div class="primary-container">

@@ -29,8 +29,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('accounts', '0002_auto_20241204_2034'),
-        ('consultation', '0002_auto_20241206_1907'),
-
     ]
 
     operations = [

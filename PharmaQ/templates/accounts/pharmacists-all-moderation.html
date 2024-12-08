@@ -21,6 +21,9 @@
                         </form>
                     </div>
                     <div class="details">
+                        {% if not all_pharmacists %}
+                            <h6>Няма регистрирани фармацевти</h6>
+                        {% endif %}
                         {% for pharmacist in all_pharmacists %}
                             <div class="primary-detail-card">
                              
