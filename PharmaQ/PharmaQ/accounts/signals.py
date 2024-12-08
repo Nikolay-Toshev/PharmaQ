@@ -10,7 +10,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         if instance.is_patient:
             subject = 'Добре дошли във PharmaQ!'
-            message = (f'Здравейте, {instance.username}, Благодарим Ви, че се регистрирахте в във PharmaQ! Радваме се, че сте с нас.'
+            message = (f'Здравейте, {instance.username}! Благодарим Ви, че се регистрирахте в във PharmaQ! Радваме се, че сте с нас.'
                        f' Ако имате въпроси или се нуждаете от помощ, не се колебайте да се свържете с нас на support@pharma-q.org')
             recipient_list = [instance.email]
             send_mail(subject, message, None, recipient_list)
@@ -33,10 +33,10 @@ def approve_pharmacist(sender, instance, **kwargs):
             previous_instance = None
 
         if previous_instance:
-            if previous_instance.is_active != instance.is_active:
-                if not previous_instance.is_active and instance.is_active:
+            if previous_instance.is_approved != instance.is_approved:
+                if not previous_instance.is_approved and instance.is_approved:
                     subject = 'Добре дошли във PharmaQ!'
-                    message = (f'Здравейте, {instance.username}, Благодарим Ви, че се регистрирахте в във PharmaQ! Радваме се, че сте с нас.'
+                    message = (f'Здравейте, {instance.username}! Благодарим Ви, че се регистрирахте в във PharmaQ! Радваме се, че сте с нас.'
                        f' Ако имате въпроси или се нуждаете от помощ, не се колебайте да се свържете с нас на support@pharma-q.org')
                     recipient_list = [instance.email]
                     send_mail(subject, message, None, recipient_list)

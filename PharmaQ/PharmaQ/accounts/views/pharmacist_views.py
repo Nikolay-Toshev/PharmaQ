@@ -31,7 +31,7 @@ class PharmacistRegistrationView(CreateView):
         pharmacist = form.save(commit=False)
         pharmacist.is_patient = False
         pharmacist.is_pharmacist = True
-        pharmacist.is_active = False
+        pharmacist.is_approved = False
         pharmacist.professional_card = professional_card
         response = super().form_valid(form)
 
@@ -102,7 +102,7 @@ class UnapprovedPharmacistListView(LoginRequiredMixin, UserPassesTestMixin, Sear
         return user.groups.filter(name__exact='site-moderator').exists()
 
     def get_queryset(self, **kwargs):
-        queryset = UserModel.objects.filter(groups__name='pharmacist', is_active=False)
+        queryset = UserModel.objects.filter(groups__name='pharmacist', is_approved=False)
         queryset = self.apply_search_filter(queryset)
         return queryset
 
@@ -134,7 +134,7 @@ class AllPharmacistsModerationListView(LoginRequiredMixin, UserPassesTestMixin, 
 def approve_pharmacist(request, pk):
     if request.method == 'POST':
         pharmacist = UserModel.objects.get(pk=pk)
-        pharmacist.is_active = True
+        pharmacist.is_approved = True
         pharmacist.save()
 
     return redirect(request.META.get('HTTP_REFERER'))

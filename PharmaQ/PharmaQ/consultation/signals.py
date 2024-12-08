@@ -9,7 +9,7 @@ def send_email_notification(sender, instance, created, **kwargs):
     if created:
         question = instance.question_id
         email_receiver = question.creator_id
-        subject = 'New Answer'
-        message = f'Your question {question.title} has been answered'
+        subject = 'Нов отговор'
+        message = f'На вашият въпрос "{question.title}" беше отговорено. можете да влезнете в профила си и да го прочетете.'
         recipient_list = [email_receiver.email]
         send_mail(subject, message, None, recipient_list)

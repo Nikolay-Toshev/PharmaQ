@@ -38,7 +38,7 @@
                                         </div>
                                     {% else %}
                                         <div class="primary-img">
-                                            <a href="{% url 'user-details' request.user.id %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                            <a href="{% url 'user-details' request.user.id %}"><img src="{% static 'img/default-profile-pic.png' %}" ></a>
                                         </div>
                                     {% endif %}
                                 {% else %}
@@ -50,7 +50,7 @@
                                         </div>
                                     {% else %}
                                         <div class="primary-img">
-                                            <a href="{% url 'user-public-details' pharmacist.id %}"><img src="{% static 'img/kisspng-national-cyber-security-alliance-organization-drup-icon-vectors-download-customers-free-5ab19558399358.7514702115215875442358.png' %}" ></a>
+                                            <a href="{% url 'user-public-details' pharmacist.id %}"><img src="{% static 'img/default-profile-pic.png' %}" ></a>
                                         </div>
                                     {% endif %}
                                 {% endif %}

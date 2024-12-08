@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.shortcuts import get_object_or_404, redirect
@@ -9,14 +9,16 @@ from PharmaQ.accounts.utils import get_pharmacist_rating
 
 UserModel = get_user_model()
 
-class AppUserLoginView(LoginView, UserPassesTestMixin):
+class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
-    def test_func(self):
-        user = get_object_or_404(UserModel, pk=self.request.user.id)
-        return user.is_active
+    def form_valid(self, form):
+        user = form.get_user()
 
-    def handle_no_permission(self):
+        if not user.is_approved:
+            return redirect('not-approved')
+
+        login(self.request, user)
         return redirect('index')
 
     def get_form(self, *args, **kwargs):
@@ -75,6 +77,21 @@ class AppUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         user = get_object_or_404(UserModel, pk=self.kwargs['pk'])
         return self.request.user == user
+
+    def post(self, request, *args, **kwargs):
+        user = self.get_object()
+
+        user.is_active = False
+        user.save()
+
+        if self.request.user == user:
+            from django.contrib.auth import logout
+            logout(request)
+
+        return redirect(self.success_url)
+
+    def delete(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = UserModel

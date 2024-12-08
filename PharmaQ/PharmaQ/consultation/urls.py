@@ -15,7 +15,7 @@ urlpatterns = [
     ])),
     path('questions/', include([
         path('create/', QuestionCreateView.as_view(), name='question-create'),
-        path('bublished-questions/', PublishedQuestionsListView.as_view(), name='question-list-published'),
+        path('published-questions/', PublishedQuestionsListView.as_view(), name='question-list-published'),
         path('<int:question_pk>/', include([
             path('publish', publish_question, name='question-publish'),
             path('unpublish/', unpublish_question, name='question-unpublish'),

@@ -5,7 +5,7 @@
 <nav class="navbar">
     <div class="container">
         <a href="{% url 'index' %}" class="logo">
-            <img src="{% static 'img/0b60191ffe56a7f235f5a1c481acbfaa.png' %}" alt="" class="logo-pic">
+            <img src="{% static 'img/pharm-logo.png' %}" alt="" class="logo-pic">
             PharmaQ</a>
         <ul class="nav-links">
             <li><a href="{% url 'how-to-use' %}">За платформата</a></li>
@@ -16,9 +16,7 @@
                     <li><a href="{% url 'pharmacist-list-all' %}">Нашите фармацевти</a></li>
                 {% endif %}
                 {% if request.user|check_user_group:'site-moderator' %}
-                    <li><a href="{% url 'pharmacists-moderation' request.user.pk %}">Всички фармацевти</a></li>
-                    <li><a href="{% url 'patients-moderation' request.user.pk %}">Всички пациенти</a></li>
-                    <li><a href="{% url 'approve' request.user.pk %}">Одобряване на фармацевт</a></li>
+                    
                 {% endif %}
                 <li class="menu-item dropdown">
                     <a href="#">Профил</a>
@@ -34,6 +32,9 @@
                             <li><a href="{% url 'unanswered-question-list' request.user.pk %}">Отговори на въпрос</a></li>
                         {% elif request.user|check_user_group:"site-moderator" %}
                             <li><a href="{% url 'category-create' %}">Създай категория</a></li>
+                            <li><a href="{% url 'pharmacists-moderation' request.user.pk %}">Всички фармацевти</a></li>
+                            <li><a href="{% url 'patients-moderation' request.user.pk %}">Всички пациенти</a></li>
+                            <li><a href="{% url 'approve' request.user.pk %}">Одобряване на фармацевт</a></li>
                         {% endif %}
                     </ul>
                 </li>

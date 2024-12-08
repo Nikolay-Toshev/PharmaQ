@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from PharmaQ.accounts.validators import ImageSizeValidator
+
 
 class AppUser(AbstractUser):
 
@@ -8,13 +10,15 @@ class AppUser(AbstractUser):
 
     personal_info = models.TextField(blank=True, null=True)
 
-    profile_img = models.ImageField(upload_to="profile_imgs/", blank=True, null=True)
+    profile_img = models.ImageField(upload_to="profile_imgs/", blank=True, null=True, validators=[ImageSizeValidator(5)])
 
     is_patient = models.BooleanField(default=False)
 
     is_pharmacist = models.BooleanField(default=False)
 
-    professional_card = models.ImageField(upload_to="professional_cards/", blank=True, null=True)
+    is_approved = models.BooleanField(default=True)
+
+    professional_card = models.ImageField(upload_to="professional_cards/", blank=True, null=True, validators=[ImageSizeValidator(5)])
 
     def save(self, *args, **kwargs):
         if self.pk:
