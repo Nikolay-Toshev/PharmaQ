@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-ENV DJANGO_SETTINGS_MODULE=project.settings_exam
+ENV DJANGO_SETTINGS_MODULE=PharmaQ.settings_exam
 
 EXPOSE 8000
 
