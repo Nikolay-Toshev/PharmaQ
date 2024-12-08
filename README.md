@@ -44,3 +44,5 @@ Follow these steps to clone the repository and run the Docker stack:
 Once the application is running, open your browser and navigate to:
 - http://127.0.0.1:88 (it will not work properly on localhost:88)
 - http://127.0.0.1:8025 for Mailhog
+
+Some commands, such as docker-compose up --build, may require root privileges. Use sudo if you encounter permission issues.
