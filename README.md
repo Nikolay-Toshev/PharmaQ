@@ -1,8 +1,6 @@
 # PharmaQ
 А platform, that connects patients with certified pharmacists, allowing patients to ask health-related questions and receive reliable answers.
 
-# PharmaQ
-
 This guide will walk you through setting up the **PharmaQ** application using Docker.
 
 ---
@@ -35,9 +33,14 @@ Follow these steps to clone the repository and run the Docker stack:
    ```bash
    docker-compose up --build
 
-3. **Restart the Docker Containers**
+4. **Restart the Docker Containers**
    After the application is up and running for the first time, you must restart the containers to apply the necessary database migrations: 
-   Press Ctrl+C to stop the application.
-   Run the following command to restart it:
+   - Press Ctrl+C to stop the application.
+   - Run the following command to restart it:
    ```bash
    docker-compose up --build
+
+5. **Access the Application**
+Once the application is running, open your browser and navigate to:
+- http://127.0.0.1:88 (it will not work properly on localhost:88)
+- http://127.0.0.1:8025 for Mailhog
