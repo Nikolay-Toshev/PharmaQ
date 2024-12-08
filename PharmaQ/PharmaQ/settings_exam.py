@@ -143,7 +143,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://django:8000',
 ]
 
-SESSION_COOKIE_DOMAIN = "..localhost"
+SESSION_COOKIE_DOMAIN = ".localhost"
 CSRF_COOKIE_DOMAIN = ".localhost"
 
 
