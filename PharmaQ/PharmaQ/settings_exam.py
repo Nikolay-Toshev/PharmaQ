@@ -140,7 +140,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://django:8000',
+    'http://django:88',
+    'http://localhost:88',
+    'http://127.0.0.1:88',
+    'http://192.168.0.200:88',
 ]
 
 SESSION_COOKIE_DOMAIN = ".localhost"
