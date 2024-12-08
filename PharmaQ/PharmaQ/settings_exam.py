@@ -93,7 +93,7 @@ DATABASES = {
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         "HOST": os.getenv('DB_HOST'),
-        "PORT": os.getenv('DB_PORT', 5432),
+        "PORT": os.getenv('DB_PORT', 5434),
     }
 }
 
@@ -138,6 +138,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://django:8000',
+]
+
+SESSION_COOKIE_DOMAIN = "..localhost"
+CSRF_COOKIE_DOMAIN = ".localhost"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
