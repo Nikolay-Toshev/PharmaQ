@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: django_app
-    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn PharmaQ.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
     environment:
-      - DEBUG=1
+      - DEBUG=0
       - DB_HOST=db
       - DATABASE_NAME=postgres
       - DATABASE_USER=postgres
@@ -22,6 +22,7 @@ services:
       - EMAIL_HOST=mailhog
       - EMAIL_PORT=1025
       - SECRET_KEY=temp-secret-key-lkjlkfjg-sdfgkj-dfkjndf-sdf12dsfb-fgb
+      - DEFAULT_FROM_EMAIL=support@pharma-q.org
 
   db:
     image: postgres:15
