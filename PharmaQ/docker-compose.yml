@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: django_app
-    command: gunicorn PharmaQ.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn PharmaQ.wsgi:application --bind 127.0.0.1:8000
     volumes:
       - .:/app
     ports:
