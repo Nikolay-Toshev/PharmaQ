@@ -46,3 +46,6 @@ Once the application is running, open your browser and navigate to:
 - http://127.0.0.1:8025 for Mailhog
 
 Some commands, such as docker-compose up --build, may require root privileges. Use sudo if you encounter permission issues.
+
+There will be created superuser with username: admin and password: admin
+There will be created moderator with username: moderator and password: parolka123
