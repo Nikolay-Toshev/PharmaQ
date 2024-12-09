@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="detail-outer-container">
+        <div class="detail-container">
+            <div class="detail-card">
+                <h1 class="detail-title">Свържи се с нас</h1>
+                <div class="form-outer-container-contact-us">
+                    <div class="form-container">
+                        <div class="form-card">
+                            <h1 class="form-title">Изпрати съобщение</h1>
+                            <p>До: {{ receiver.username }}</p>
+                            <br>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form }}
+                                <button type="submit" class="btn btn-primary">Изпрати</button>
+                            </form>
+            
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -42,6 +42,16 @@ form .answer-details h3 {
     align-items: center;
 }
 
+.form-outer-container-contact-us {
+    margin: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
 .form-container {
     display: flex;
     justify-content: center;

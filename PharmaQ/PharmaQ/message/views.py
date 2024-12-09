@@ -110,3 +110,31 @@ class MessageDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
         return user == message.receiver or message.sender == user
 
+
+class ContactUsMessageCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Message
+    form_class = MessageCreateForm
+    template_name = 'messages/contact-us.html'
+    success_url = reverse_lazy('index')
+
+    def test_func(self):
+        user = get_object_or_404(UserModel, pk=self.kwargs['user_pk'])
+        return user == self.request.user
+
+    def form_valid(self, form):
+        message = form.save(commit=False)
+        sender = self.request.user
+        receiver = UserModel.objects.filter(groups__name='site-moderator').first()
+        message.sender = sender
+        message.receiver = receiver
+        message.save()
+
+        response = super().form_valid(form)
+
+        return response
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        receiver = UserModel.objects.filter(groups__name='site-moderator').first()
+        context["receiver"] = receiver
+        return context
