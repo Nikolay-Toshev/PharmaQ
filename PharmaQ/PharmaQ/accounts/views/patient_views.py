@@ -67,7 +67,7 @@ class AllPatientsModerationListView(LoginRequiredMixin, UserPassesTestMixin, Sea
     search_fields = ['username','first_name', 'last_name', 'email']
 
     def get_queryset(self):
-        queryset = UserModel.objects.filter(groups__name='patient')
+        queryset = UserModel.objects.filter(groups__name='patient', is_active=True)
         queryset = self.apply_search_filter(queryset)
         return queryset
 

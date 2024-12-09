@@ -93,7 +93,7 @@ class AppUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
-class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+class AppUserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = UserModel
     template_name = 'accounts/user-details.html'
     context_object_name = 'user'
@@ -112,7 +112,7 @@ class UserDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
 
 
-class PublicUserDetailView(LoginRequiredMixin, DetailView):
+class PublicAppUserDetailView(LoginRequiredMixin, DetailView):
     model = UserModel
     template_name = 'accounts/user-details-public.html'
     context_object_name = 'user'

@@ -73,7 +73,7 @@ class AllPharmacistListView(LoginRequiredMixin, SearchMixin, ListView):
 
     def get_queryset(self, **kwargs):
         queryset = (UserModel.objects
-                    .filter(groups__name='pharmacist', is_active=True)
+                    .filter(groups__name='pharmacist', is_active=True, is_approved=True)
                     .annotate(likes=Count('answers__ratings', filter=Q(answers__ratings__like=True))
                               ,dislikes=Count('answers__ratings', filter=Q(answers__ratings__dislike=True)))
                     .annotate(rating=F('likes') - F('dislikes'))
@@ -102,7 +102,7 @@ class UnapprovedPharmacistListView(LoginRequiredMixin, UserPassesTestMixin, Sear
         return user.groups.filter(name__exact='site-moderator').exists()
 
     def get_queryset(self, **kwargs):
-        queryset = UserModel.objects.filter(groups__name='pharmacist', is_approved=False)
+        queryset = UserModel.objects.filter(groups__name='pharmacist', is_approved=False, is_active=True)
         queryset = self.apply_search_filter(queryset)
         return queryset
 
@@ -120,7 +120,7 @@ class AllPharmacistsModerationListView(LoginRequiredMixin, UserPassesTestMixin, 
         return user.groups.filter(name__exact='site-moderator').exists()
 
     def get_queryset(self, **kwargs):
-        queryset = (UserModel.objects.filter(groups__name='pharmacist')
+        queryset = (UserModel.objects.filter(groups__name='pharmacist', is_active=True)
                     .annotate(likes=Count('answers__ratings', filter=Q(answers__ratings__like=True))
                               ,dislikes=Count('answers__ratings', filter=Q(answers__ratings__dislike=True)))
                     .annotate(rating=F('likes') - F('dislikes'))
