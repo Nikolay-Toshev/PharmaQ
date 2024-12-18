@@ -26,7 +26,7 @@ Follow these steps to clone the repository and run the Docker stack:
 2. **Navigate to the Project Directory**  
    Move into the project directory:
    ```bash
-   cd ./PharmaQ/PharmaQ
+   cd ./PharmaQ
    
 3. **Build and Start the Docker Containers**  
    Build and run the application with Docker Compose:
